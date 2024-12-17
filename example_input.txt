@@ -1,0 +1,40 @@
+// This is a comment.
+// At the beginning we will add our teams and set their initial Elo
+
+#add Georgia,1500
+#add Florida,1500
+#add South Carolina,1500
+#add Tennessee,1500
+
+// Now we will start playing games in chronological order
+
+// 2017
+// Learning rates are set higher at the start of a season
+// since a lot of roster turnover has occurred.
+#setrate 2
+Tennessee,V,20,Florida,H,26
+Georgia,H,41,Tennessee,V,0
+South Carolina,V,15,Tennessee,H,9
+Georgia,V,42,Florida,V,7
+Georgia,H,24,South Carolina,V,10
+South Carolina,H,28,Florida,V,20
+
+// 2018
+#setrate 2
+Georgia,V,41,South Carolina,H,17
+Florida,V,47,Tennessee,H,21
+Georgia,H,38,Tennessee,V,12
+Georgia,V,36,Florida,V,17
+South Carolina,H,27,Tennessee,V,24
+Florida,H,35,South Carolina,V,31
+
+// 2019
+#setrate 2
+
+// We can end the elo file at any point with the below command.  This halts elo calculations at this point.
+#end
+
+// The following games will not be scored
+South Carolina,H,100,Georgia,V,0
+Tennessee,H,100,Georgia,V,0
+Florida,V,100,Georgia,V,0
