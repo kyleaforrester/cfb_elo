@@ -141,7 +141,7 @@ UConn,V,0,Fresno St.,H,45
 Hawaii,V,10,UCLA,H,44
 UTEP,V,30,New Mexico St.,H,3
 Southern Utah,V,14,San Jose St.,H,45
-UAB,V,31,Jacksonville St.,H,0
+UAB,V,31,Jacksonville St.,V,0
 Ohio St.,V,45,Minnesota,H,31
 The Citadel,V,14,Coastal Carolina,H,52
 Weber St.,V,17,Utah,H,40
@@ -156,7 +156,7 @@ Reinhardt,V,25,Kennesaw St.,H,35
 Houston Christian,V,17,New Mexico,H,27
 Bowling Green,V,6,Tennessee,H,38
 UT Martin,V,21,Western Ky.,H,59
-East Carolina,V,19,App State,H,33
+East Carolina,V,19,App State,V,33
 Sam Houston,V,42,Northern Ariz.,H,16
 Eastern Wash.,V,35,UNLV,H,33
 North Carolina,V,10,Virginia Tech,H,17
@@ -166,9 +166,9 @@ Old Dominion,V,10,Wake Forest,H,42
 South Dakota,V,14,Kansas,H,17
 Northern Colo.,V,7,Colorado,H,35
 Michigan St.,V,38,Northwestern,H,21
-Alabama,V,44,Miami (FL),H,13
+Alabama,V,44,Miami (FL),V,13
 Tulane,V,35,Oklahoma,H,40
-Georgia,V,10,Clemson,H,3
+Georgia,V,10,Clemson,V,3
 Kent St.,V,10,Texas A&M,H,41
 UNI,V,10,Iowa St.,H,16
 Miami (OH),V,14,Cincinnati,H,49
@@ -182,7 +182,7 @@ Montana,V,13,Washington,H,7
 Louisiana,V,18,Texas,H,38
 Colgate,V,0,Boston College,H,51
 Army West Point,V,43,Georgia St.,H,10
-Stanford,V,7,Kansas St.,H,24
+Stanford,V,7,Kansas St.,V,24
 ULM,V,10,Kentucky,H,45
 Fordham,V,7,Nebraska,H,52
 Temple,V,14,Rutgers,H,61
@@ -201,7 +201,7 @@ Morehead St.,V,10,James Madison,H,68
 Campbell,V,7,Liberty,H,48
 Central Ark.,V,21,Arkansas St.,H,40
 Akron,V,10,Auburn,H,60
-Texas Tech,V,38,Houston,H,21
+Texas Tech,V,38,Houston,V,21
 Nicholls,V,17,Memphis,H,42
 Monmouth,V,15,Middle Tenn.,H,50
 Syracuse,V,29,Ohio,H,9
@@ -220,13 +220,13 @@ Duquesne,V,3,TCU,H,45
 ETSU,V,23,Vanderbilt,H,3
 NIU,V,22,Georgia Tech,H,21
 Bethune-Cookman,V,28,UTEP,H,37
-BYU,V,24,Arizona,H,16
+BYU,V,24,Arizona,V,16
 Nevada,V,22,California,H,17
 New Mexico St.,V,10,San Diego St.,H,28
 Utah St.,V,26,Washington St.,H,23
 Notre Dame,V,41,Florida St.,H,38
 Portland St.,V,35,Hawaii,H,49
-Louisville,V,24,Ole Miss,H,43
+Louisville,V,24,Ole Miss,V,43
 South Dakota St.,V,42,Colorado St.,H,23
 Kansas,V,22,Coastal Carolina,H,49
 N.C. A&T,V,17,Duke,H,45
@@ -522,7 +522,7 @@ Charlotte,V,45,FIU,H,33
 Alabama,V,38,Texas A&M,H,41
 Georgia,V,34,Auburn,H,10
 Penn St.,V,20,Iowa,H,23
-Oklahoma,V,55,Texas,H,48
+Oklahoma,V,55,Texas,V,48
 Maryland,V,17,Ohio St.,H,66
 Michigan,V,32,Nebraska,H,29
 Boise St.,V,26,BYU,H,17
@@ -675,7 +675,7 @@ Troy,V,28,Coastal Carolina,H,35
 South Fla.,V,14,East Carolina,H,29
 Navy,V,20,Tulsa,H,17
 UNLV,V,20,Nevada,H,51
-Georgia,V,34,Florida,H,7
+Georgia,V,34,Florida,V,7
 Cincinnati,V,31,Tulane,H,12
 Texas Tech,V,21,Oklahoma,H,52
 Penn St.,V,24,Ohio St.,H,33
@@ -1082,7 +1082,7 @@ UNI,V,17,Air Force,H,48
 Southeast Mo. St.,V,10,Iowa St.,H,42
 Bowling Green,V,17,UCLA,H,45
 Cincinnati,V,24,Arkansas,H,31
-Oregon,V,3,Georgia,H,49
+Oregon,V,3,Georgia,V,49
 Norfolk St.,V,3,Marshall,H,55
 Bethune-Cookman,V,13,Miami (FL),H,70
 North Dakota,V,17,Nebraska,H,38
@@ -1124,9 +1124,9 @@ Murray St.,V,10,Texas Tech,H,63
 Idaho,V,17,Washington St.,H,24
 Boise St.,V,17,Oregon St.,H,34
 Kent St.,V,20,Washington,H,45
-Florida St.,V,24,LSU,H,23
+Florida St.,V,24,LSU,V,23
 Western Ky.,V,49,Hawaii,H,17
-Clemson,V,41,Georgia Tech,H,10
+Clemson,V,41,Georgia Tech,V,10
 Eastern Mich.,V,14,Louisiana,H,49
 Louisville,V,20,UCF,H,14
 Boise St.,V,31,New Mexico,H,14
@@ -1439,7 +1439,7 @@ South Fla.,V,24,Cincinnati,H,28
 Buffalo,V,38,Bowling Green,H,7
 Missouri,V,17,Florida,H,24
 Purdue,V,31,Maryland,H,29
-Texas,V,49,Oklahoma,H,0
+Texas,V,49,Oklahoma,V,0
 Louisville,V,34,Virginia,H,17
 Eastern Mich.,V,45,Western Mich.,H,23
 Ga. Southern,V,33,Georgia St.,H,41
@@ -1580,7 +1580,7 @@ Virginia Tech,V,21,NC State,H,22
 Louisiana,V,24,Southern Miss.,H,39
 East Carolina,V,27,BYU,H,24
 Louisiana Tech,V,34,FIU,H,42
-Florida,V,20,Georgia,H,42
+Florida,V,20,Georgia,V,42
 Ohio St.,V,44,Penn St.,H,31
 Kentucky,V,6,Tennessee,H,44
 Michigan St.,V,7,Michigan,H,29
@@ -1935,7 +1935,7 @@ TCU,V,7,Georgia,V,65
 // 2023 Season
 #setrate 2
 San Jose St.,V,28,Southern California,H,56
-Navy,V,3,Notre Dame,H,42
+Navy,V,3,Notre Dame,V,42
 UTEP,V,14,Jacksonville St.,H,17
 Massachusetts,V,41,New Mexico St.,H,30
 Ohio,V,13,San Diego St.,H,20
@@ -1955,7 +1955,7 @@ Southern Utah,V,21,Arizona St.,H,24
 Howard,V,23,Eastern Mich.,H,33
 Miami (OH),V,3,Miami (FL),H,38
 Central Mich.,V,7,Michigan St.,H,31
-Louisville,V,39,Georgia Tech,H,34
+Louisville,V,39,Georgia Tech,V,34
 Missouri St.,V,17,Kansas,H,48
 Stanford,V,37,Hawaii,H,24
 UT Martin,V,7,Georgia,H,48
@@ -1973,7 +1973,7 @@ Southeast Mo. St.,V,0,Kansas St.,H,45
 Colorado,V,45,TCU,H,42
 Buffalo,V,17,Wisconsin,H,38
 Arkansas St.,V,0,Oklahoma,H,73
-North Carolina,V,31,South Carolina,H,17
+North Carolina,V,31,South Carolina,V,17
 Mercer,V,7,Ole Miss,H,73
 New Mexico,V,10,Texas A&M,H,52
 South Alabama,V,17,Tulane,H,37
@@ -2024,7 +2024,7 @@ Northern Ariz.,V,3,Arizona,H,38
 Sam Houston,V,0,BYU,H,14
 Idaho St.,V,28,San Diego St.,H,36
 Coastal Carolina,V,13,UCLA,H,27
-LSU,V,24,Florida St.,H,45
+LSU,V,24,Florida St.,V,45
 Oregon St.,V,42,San Jose St.,H,17
 Northwestern,V,7,Rutgers,H,24
 Clemson,V,7,Duke,H,28
@@ -2322,7 +2322,7 @@ Kansas St.,V,21,Oklahoma St.,H,29
 Nebraska,V,20,Illinois,H,7
 Kentucky,V,13,Georgia,H,51
 Michigan,V,52,Minnesota,H,10
-Oklahoma,V,34,Texas,H,30
+Oklahoma,V,34,Texas,V,30
 Maryland,V,17,Ohio St.,H,37
 Virginia Tech,V,17,Florida St.,H,39
 Arizona,V,41,Southern California,H,43
@@ -2481,7 +2481,7 @@ UTEP,V,37,Sam Houston,H,34
 Georgia St.,V,27,Ga. Southern,H,44
 Syracuse,V,10,Virginia Tech,H,38
 Fla. Atlantic,V,38,Charlotte,H,16
-Georgia,V,43,Florida,H,20
+Georgia,V,43,Florida,V,20
 Ohio St.,V,24,Wisconsin,H,10
 Florida St.,V,41,Wake Forest,H,16
 Washington,V,42,Stanford,H,33
@@ -2847,7 +2847,7 @@ Washington,V,13,Michigan,V,34
 
 // 2024 Season
 #setrate 2
-Florida St.,V,21,Georgia Tech,H,24
+Florida St.,V,21,Georgia Tech,V,24
 Montana St.,V,35,New Mexico,H,31
 SMU,V,29,Nevada,H,24
 Delaware St.,V,14,Hawaii,H,35
@@ -2878,7 +2878,7 @@ Fla. Atlantic,V,10,Michigan St.,H,16
 Elon,V,3,Duke,H,26
 Western Mich.,V,14,Wisconsin,H,28
 TCU,V,34,Stanford,H,27
-Clemson,V,3,Georgia,H,34
+Clemson,V,3,Georgia,V,34
 Akron,V,6,Ohio St.,H,52
 Idaho,V,14,Oregon,H,24
 Colorado St.,V,0,Texas,H,52
@@ -2945,7 +2945,7 @@ Robert Morris,V,14,Utah St.,H,36
 Southeast Mo. St.,V,16,New Mexico St.,H,23
 Wyoming,V,7,Arizona St.,H,48
 Weber St.,V,3,Washington,H,35
-Southern California,V,27,LSU,H,20
+Southern California,V,27,LSU,V,20
 Boston College,V,28,Florida St.,H,13
 Western Ill.,V,3,Indiana,H,77
 BYU,V,18,SMU,H,15
@@ -2962,7 +2962,7 @@ Buffalo,V,0,Missouri,H,38
 Baylor,V,12,Utah,H,23
 Florida A&M,V,9,Miami (FL),H,56
 Utah St.,V,0,Southern California,H,48
-Tennessee,V,51,NC State,H,10
+Tennessee,V,51,NC State,V,10
 Houston,V,12,Oklahoma,H,16
 Arkansas,V,31,Oklahoma St.,H,39
 Kansas St.,V,34,Tulane,H,27
@@ -3275,7 +3275,7 @@ Stanford,V,7,Notre Dame,H,49
 Iowa St.,V,28,West Virginia,H,16
 Arizona,V,19,BYU,H,41
 Boise St.,V,28,Hawaii,H,7
-Texas,V,34,Oklahoma,H,3
+Texas,V,34,Oklahoma,V,3
 Kansas St.,V,31,Colorado,H,28
 Missouri,V,45,Massachusetts,H,3
 California,V,15,Pittsburgh,H,17
@@ -3434,7 +3434,7 @@ San Diego St.,V,24,Boise St.,H,56
 Georgia St.,V,27,UConn,H,34
 South Fla.,V,44,Fla. Atlantic,H,21
 Oregon,V,38,Michigan,H,17
-Florida,V,20,Georgia,H,34
+Florida,V,20,Georgia,V,34
 Ohio St.,V,20,Penn St.,H,13
 Duke,V,31,Miami (FL),H,53
 Kentucky,V,18,Tennessee,H,28
