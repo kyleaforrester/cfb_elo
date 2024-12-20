@@ -105,7 +105,7 @@ def generate_html(elo_ratings, history):
 
         teams_html += '''
             <tr class="subtable">
-                <td colspan="4">
+                <td colspan="6">
                     <table>
                         <thead>
                             <tr>
