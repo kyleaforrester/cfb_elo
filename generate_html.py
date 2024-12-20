@@ -1,4 +1,4 @@
-def generate_html(elo_ratings):
+def generate_html(elo_ratings, history):
     html = '''
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +38,23 @@ def generate_html(elo_ratings):
         tr:hover {
             background-color: #f1f1f1;
         }
+        .subtable {
+            display: none;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ddd;
+        }
+        .subtable td {
+            padding: 5px 10px;
+        }
     </style>
+    <script>
+        function toggleSubtable(row) {
+            const subtable = row.nextElementSibling;
+            if (subtable && subtable.classList.contains('subtable')) {
+                subtable.style.display = subtable.style.display === 'table-row' ? 'none' : 'table-row';
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -52,6 +68,7 @@ def generate_html(elo_ratings):
                 <th>Elo Rating</th>
                 <th>Change Since Last Game</th>
                 <th>Change Since 3 Games</th>
+                <th>Change Since Season Start</th>
             </tr>
         </thead>
         <tbody>
@@ -74,13 +91,61 @@ def generate_html(elo_ratings):
         if len(elo_list) >= 4:
             change_since_3 = int(round(elo_list[-1] - elo_list[-4],0))
 
+        change_since_season = int(round(elo_list[-1] - elo_list[-1 - len(history[team[1]])],0))
+
         teams_html += '''
-            <tr>
+            <tr onclick="toggleSubtable(this)">
                 <td>{}</td>
                 <td>{}</td>
                 <td>{}</td>
                 <td>{}</td>
                 <td>{}</td>
-            </tr>'''.format(team[0] + 1, team[1], rating, change_since_1, change_since_3)
+                <td>{}</td>
+            </tr>'''.format(team[0] + 1, team[1], rating, change_since_1, change_since_3, change_since_season)
+
+        teams_html += '''
+            <tr class="subtable">
+                <td colspan="4">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Home</th>
+                                <th>Elo</th>
+                                <th>Opponent</th>
+                                <th>Opponent Elo</th>
+                                <th>Win Chance</th>
+                                <th>Score</th>
+                                <th>Result</th>
+                                <th>Elo Change</th>
+                            </tr>
+                        </thead>
+                        <tbody>'''
+        for game in history[team[1]]:
+            is_home = game[0]
+            elo = round(game[1], 1)
+            opponent = game[2]
+            opponent_elo = round(game[3], 1)
+            win_chance = round(game[4], 3)
+            score = game[5]
+            result = round(game[6], 3)
+            elo_change = round(game[7], 1)
+
+            teams_html += '''
+                            <tr>
+                                <td>{}</td>
+                                <td>{}</td>
+                                <td>{}</td>
+                                <td>{}</td>
+                                <td>{:.3f}</td>
+                                <td>{}</td>
+                                <td>{}</td>
+                                <td>{}</td>
+                            </tr>'''.format(is_home, elo, opponent, opponent_elo, win_chance, score, result, elo_change)
+
+        teams_html += '''
+                        </tbody>
+                    </table>
+                </td>
+            </tr>'''
 
     return html.replace('{{TEAMS_HTML}}', teams_html)

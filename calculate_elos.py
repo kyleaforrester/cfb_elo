@@ -12,12 +12,13 @@ def parse_input_file():
 
     return [l.strip() for l in open(sys.argv[1]).readlines() if len(l.strip()) > 0]
 
-def add_team(instr, elo_ratings, games_played):
+def add_team(instr, elo_ratings, games_played, history):
     team_elo = instr.split('#add ')[1].split(',')
     team = team_elo[0]
     elo = team_elo[1]
     elo_ratings[team] = [int(elo)]
     games_played[team] = 0
+    history[team] = []
 
 def predict_winchance(my_rating, my_home, enemy_rating, enemy_home):
     if my_home == True:
@@ -52,7 +53,7 @@ def elo_change(games_played, winchance_diff, learning_rate):
 
     return winchance_diff * 150 * new_rate
 
-def calculate_elo_changes(instr, elo_ratings, games_played, learning_rate):
+def calculate_elo_changes(instr, elo_ratings, games_played, learning_rate, history):
     split_string = instr.split(',')
     a_name = split_string[0]
     a_home = split_string[1] == 'H'
@@ -80,11 +81,8 @@ def calculate_elo_changes(instr, elo_ratings, games_played, learning_rate):
     games_played[a_name] += 1
     games_played[b_name] += 1
 
-    follow_team = ''
-    if a_name == follow_team or b_name == follow_team:
-        print('{} {} at {} {}. Expected result: {}'.format(a_name, elo_ratings[a_name][-2], b_name, elo_ratings[b_name][-2], a_expected_winchance))
-        print('Result: {} to {}. Result winchance: {}'.format(a_score, b_score, a_result_winchance))
-        print('{} change of {}, {} change of {}'.format(a_name, a_elo_change, b_name, b_elo_change))
+    history[a_name].append([a_home, elo_ratings[a_name][-2], b_name, elo_ratings[b_name][-2], a_expected_winchance, str(a_score) + ' - ' + str(b_score), a_result_winchance, a_elo_change])
+    history[b_name].append([b_home, elo_ratings[b_name][-2], a_name, elo_ratings[a_name][-2], b_expected_winchance, str(b_score) + ' - ' + str(a_score), b_result_winchance, b_elo_change])
 
 if __name__ == '__main__':
     instructions = parse_input_file()
@@ -92,6 +90,7 @@ if __name__ == '__main__':
     learning_rate = 1
     games_played = {}
     elo_ratings = {}
+    history = {}
     for instr in instructions:
         if instr.startswith('//'):
             continue
@@ -101,15 +100,17 @@ if __name__ == '__main__':
             learning_rate = int(instr.split('#setrate ')[1])
             for key in games_played.keys():
                 games_played[key] = 0
+            for key in history.keys():
+                history[key] = []
         elif instr.startswith('#add '):
-            add_team(instr, elo_ratings, games_played)
+            add_team(instr, elo_ratings, games_played, history)
         elif instr.startswith('#end'):
             break
         elif len(instr.split(',')) == 6:
             # Calculate elo changes
-            calculate_elo_changes(instr, elo_ratings, games_played, learning_rate)
+            calculate_elo_changes(instr, elo_ratings, games_played, learning_rate, history)
         else:
             print('Invalid command: {}'.format(instr))
             continue
 
-    print(generate_html.generate_html(elo_ratings))
+    print(generate_html.generate_html(elo_ratings, history))
