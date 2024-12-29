@@ -1,4 +1,4 @@
-def generate_html(elo_ratings, history):
+def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present):
     html = '''
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +66,8 @@ def generate_html(elo_ratings, history):
                 <th>Rank</th>
                 <th>Team Name</th>
                 <th>Elo Rating</th>
+                <th>Win 50 Past</th>
+                <th>Win 50 Present</th>
                 <th>Change Since Last Game</th>
                 <th>Change Since 3 Games</th>
                 <th>Change Since Season Start</th>
@@ -82,6 +84,8 @@ def generate_html(elo_ratings, history):
     for team in enumerate(sorted(list(elo_ratings.keys()), key=lambda x: elo_ratings[x][-1], reverse=True)):
         elo_list = elo_ratings[team[1]]
         rating = int(round(elo_list[-1],0))
+        my_team_win50_past = int(round(win50_elo_past[team[1]], 0))
+        my_team_win50_present = int(round(win50_elo_present[team[1]], 0))
 
         change_since_1 = None
         if len(elo_list) >= 2:
@@ -101,11 +105,13 @@ def generate_html(elo_ratings, history):
                 <td>{}</td>
                 <td>{}</td>
                 <td>{}</td>
-            </tr>'''.format(team[0] + 1, team[1], rating, change_since_1, change_since_3, change_since_season)
+                <td>{}</td>
+                <td>{}</td>
+            </tr>'''.format(team[0] + 1, team[1], rating, my_team_win50_past, my_team_win50_present, change_since_1, change_since_3, change_since_season)
 
         teams_html += '''
             <tr class="subtable">
-                <td colspan="6">
+                <td colspan="8">
                     <table>
                         <thead>
                             <tr>
@@ -124,11 +130,11 @@ def generate_html(elo_ratings, history):
             is_home = game[0]
             elo = round(game[1], 1)
             opponent = game[2]
-            opponent_elo = round(game[3], 1)
-            win_chance = round(game[4], 3)
-            score = game[5]
-            result = round(game[6], 3)
-            elo_change = round(game[7], 1)
+            opponent_elo = round(game[4], 1)
+            win_chance = round(game[5], 3)
+            score = game[6]
+            result = round(game[7], 3)
+            elo_change = round(game[8], 1)
 
             teams_html += '''
                             <tr>

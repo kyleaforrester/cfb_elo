@@ -17,7 +17,8 @@ def add_team(instr, elo_ratings, games_played, history):
     team = team_elo[0]
     elo = team_elo[1]
     elo_ratings[team] = [int(elo)]
-    games_played[team] = 0
+    # games_played is a tuple of [fbs_games, fcs_games]
+    games_played[team] = [0,0]
     history[team] = []
 
 def predict_winchance(my_rating, my_home, enemy_rating, enemy_home):
@@ -63,6 +64,10 @@ def calculate_elo_changes(instr, elo_ratings, games_played, learning_rate, histo
     b_score = int(split_string[5])
 
     if a_name not in elo_ratings or b_name not in elo_ratings:
+        if a_name in games_played:
+            games_played[a_name][1] += 1
+        if b_name in games_played:
+            games_played[b_name][1] += 1
         print('Skipping game {} vs {}'.format(a_name, b_name), file=sys.stderr)
         return
 
@@ -72,17 +77,73 @@ def calculate_elo_changes(instr, elo_ratings, games_played, learning_rate, histo
     a_result_winchance = result_winchance(a_score, b_score)
     b_result_winchance = 1 - a_result_winchance
 
-    a_elo_change = elo_change(games_played[a_name], a_result_winchance - a_expected_winchance, learning_rate)
-    b_elo_change = elo_change(games_played[b_name], b_result_winchance - b_expected_winchance, learning_rate)
+    a_elo_change = elo_change(games_played[a_name][0], a_result_winchance - a_expected_winchance, learning_rate)
+    b_elo_change = elo_change(games_played[b_name][0], b_result_winchance - b_expected_winchance, learning_rate)
 
     elo_ratings[a_name].append(elo_ratings[a_name][-1] + a_elo_change)
     elo_ratings[b_name].append(elo_ratings[b_name][-1] + b_elo_change)
 
-    games_played[a_name] += 1
-    games_played[b_name] += 1
+    games_played[a_name][0] += 1
+    games_played[b_name][0] += 1
 
-    history[a_name].append([a_home, elo_ratings[a_name][-2], b_name, elo_ratings[b_name][-2], a_expected_winchance, str(a_score) + ' - ' + str(b_score), a_result_winchance, a_elo_change])
-    history[b_name].append([b_home, elo_ratings[b_name][-2], a_name, elo_ratings[a_name][-2], b_expected_winchance, str(b_score) + ' - ' + str(a_score), b_result_winchance, b_elo_change])
+    history[a_name].append([a_home, elo_ratings[a_name][-2], b_name, b_home, elo_ratings[b_name][-2], a_expected_winchance, str(a_score) + ' - ' + str(b_score), a_result_winchance, a_elo_change])
+    history[b_name].append([b_home, elo_ratings[b_name][-2], a_name, a_home, elo_ratings[a_name][-2], b_expected_winchance, str(b_score) + ' - ' + str(a_score), b_result_winchance, b_elo_change])
+
+def calculate_expected_win_percentage(games_played, my_elo, opponent_elos):
+    # FCS games are considered an automatic win
+    avg_wins_sum = games_played[1]
+    for o_e in opponent_elos:
+        # Homes and aways already built into opponent_elos
+        avg_wins_sum += predict_winchance(my_elo, False, o_e, False)
+    return avg_wins_sum / sum(games_played)
+
+def calculate_win_50_elo(games_played, opponent_elos):
+    # Returns the hypothetical elo required to win exactly 50% of games
+    # Calculate a binary search in the elo space to find the win50 elo
+    # Stop once you are within 0.01 of the ideal expected_win_percentage
+    min_elo = min(opponent_elos)
+    max_elo = max(opponent_elos)
+    guess_elo = (min_elo + max_elo) / 2
+    expected_win_percentage = calculate_expected_win_percentage(games_played, guess_elo, opponent_elos)
+    while expected_win_percentage < 0.4999 or expected_win_percentage > 0.5001:
+        if expected_win_percentage < 0.4999:
+            min_elo = guess_elo
+        elif expected_win_percentage > 0.5001:
+            max_elo = guess_elo
+        guess_elo = (min_elo + max_elo) / 2
+        expected_win_percentage = calculate_expected_win_percentage(games_played, guess_elo, opponent_elos)
+
+    # Expected_wins is now within 0.01 of the mathematical value
+    return guess_elo
+        
+
+def calculate_win_50_elo_past(games_played, history):
+    win_50 = {}
+    for team in history.keys():
+        opponent_elos = []
+        for h in history[team]:
+            enemy_elo = h[4]
+            if h[0] == True:
+                enemy_elo -= 50
+            if h[3] == True:
+                enemy_elo += 50
+            opponent_elos.append(enemy_elo)
+        win_50[team] = calculate_win_50_elo(games_played[team], opponent_elos)
+    return win_50
+
+def calculate_win_50_elo_present(games_played, history, elo_ratings):
+    win_50 = {}
+    for team in history.keys():
+        opponent_elos = []
+        for h in history[team]:
+            enemy_elo = elo_ratings[h[2]][-1]
+            if h[0] == True:
+                enemy_elo -= 50
+            if h[3] == True:
+                enemy_elo += 50
+            opponent_elos.append(enemy_elo)
+        win_50[team] = calculate_win_50_elo(games_played[team], opponent_elos)
+    return win_50
 
 if __name__ == '__main__':
     instructions = parse_input_file()
@@ -99,7 +160,7 @@ if __name__ == '__main__':
         elif instr.startswith('#setrate '):
             learning_rate = int(instr.split('#setrate ')[1])
             for key in games_played.keys():
-                games_played[key] = 0
+                games_played[key] = [0,0]
             for key in history.keys():
                 history[key] = []
         elif instr.startswith('#add '):
@@ -113,4 +174,7 @@ if __name__ == '__main__':
             print('Invalid command: {}'.format(instr))
             continue
 
-    print(generate_html.generate_html(elo_ratings, history))
+    win_50_elo_past = calculate_win_50_elo_past(games_played, history)
+    win_50_elo_present = calculate_win_50_elo_present(games_played, history, elo_ratings)
+
+    print(generate_html.generate_html(elo_ratings, history, win_50_elo_past, win_50_elo_present))
