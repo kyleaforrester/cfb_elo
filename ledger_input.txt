@@ -3057,7 +3057,7 @@ Prairie View,V,0,Michigan St.,H,40
 Nevada,V,0,Minnesota,H,27
 Morgan St.,V,6,Ohio,H,21
 West Virginia,V,34,Pittsburgh,H,38
-Washington St.,V,24,Washington,H,19
+Washington St.,V,24,Washington,V,19
 App State,V,21,East Carolina,H,19
 Troy,V,21,Iowa,H,38
 UAB,V,27,Arkansas,H,37
@@ -3171,7 +3171,7 @@ Iowa St.,V,20,Houston,H,0
 Oklahoma St.,V,20,Kansas St.,H,42
 Oklahoma,V,27,Auburn,H,21
 BYU,V,34,Baylor,H,28
-Arkansas,V,17,Texas A&M,H,21
+Arkansas,V,17,Texas A&M,V,21
 Washington St.,V,24,Boise St.,H,45
 Western Ky.,V,20,Boston College,H,21
 Maryland,V,28,Indiana,H,42
@@ -3344,7 +3344,7 @@ Tulsa,V,10,Temple,H,20
 Kent St.,V,6,Bowling Green,H,27
 Western Mich.,V,48,Buffalo,H,41
 NC State,V,24,California,H,23
-Notre Dame,V,31,Georgia Tech,H,13
+Notre Dame,V,31,Georgia Tech,V,13
 Houston,V,14,Kansas,H,42
 Ohio,V,20,Miami (OH),H,30
 Toledo,V,13,NIU,H,6
@@ -3388,7 +3388,7 @@ Missouri,V,0,Alabama,H,34
 Kansas,V,27,Kansas St.,H,29
 Oklahoma,V,14,Ole Miss,H,26
 SMU,V,28,Duke,H,27
-Notre Dame,V,51,Navy,H,14
+Notre Dame,V,51,Navy,V,14
 Charlotte,V,28,Memphis,H,33
 Tulane,V,45,North Texas,H,37
 Buffalo,V,16,Ohio,H,47
@@ -3590,7 +3590,7 @@ Purdue,V,17,Michigan St.,H,24
 Indiana,V,15,Ohio St.,H,38
 Kentucky,V,14,Texas,H,31
 Penn St.,V,26,Minnesota,H,25
-Army West Point,V,14,Notre Dame,H,49
+Army West Point,V,14,Notre Dame,V,49
 Alabama,V,3,Oklahoma,H,24
 Wake Forest,V,14,Miami (FL),H,42
 Ole Miss,V,17,Florida,H,24
@@ -3710,12 +3710,53 @@ Marshall,V,35,James Madison,H,33
 Virginia,V,17,Virginia Tech,H,37
 Air Force,V,31,San Diego St.,H,20
 New Mexico,V,30,Hawaii,H,38
-UNLV,V,7,Boise St.,V,21
-Tulane,V,14,Army West Point,V,35
-Western Ky.,V,12,Jacksonville St.,V,52
+UNLV,V,7,Boise St.,H,21
+Tulane,V,14,Army West Point,H,35
+Western Ky.,V,12,Jacksonville St.,H,52
 Penn St.,V,37,Oregon,V,45
 Georgia,V,22,Texas,V,19
 Clemson,V,34,SMU,V,31
 Iowa St.,V,19,Arizona St.,V,45
-Ohio,V,38,Miami (OH),V,3
-Marshall,V,31,Louisiana,V,3
+Ohio,V,38,Miami (OH),H,3
+Marshall,V,31,Louisiana,H,3
+Navy,V,31,Army West Point,V,13
+South Alabama,V,30,Western Mich.,V,23
+Memphis,V,42,West Virginia,V,37
+California,V,13,UNLV,V,24
+Western Ky.,V,17,James Madison,V,27
+Ga. Southern,V,26,Sam Houston,V,31
+Indiana,V,17,Notre Dame,H,27
+Ohio,V,30,Jacksonville St.,V,27
+Tulane,V,8,Florida,V,33
+Clemson,V,24,Texas,H,38
+SMU,V,10,Penn St.,H,38
+Tennessee,V,17,Ohio St.,H,42
+UTSA,V,44,Coastal Carolina,V,15
+NIU,V,28,Fresno St.,V,20
+South Fla.,V,41,San Jose St.,V,39
+Pittsburgh,V,46,Toledo,V,48
+Rutgers,V,41,Kansas St.,V,44
+Arkansas St.,V,38,Bowling Green,V,31
+Syracuse,V,52,Washington St.,V,35
+Oklahoma,V,20,Navy,V,21
+Georgia Tech,V,27,Vanderbilt,V,35
+Texas Tech,V,26,Arkansas,V,39
+Southern California,V,35,Texas A&M,V,31
+Iowa St.,V,42,Miami (FL),V,41
+Louisiana Tech,V,6,Army West Point,V,27
+BYU,V,36,Colorado,V,14
+UConn,V,27,North Carolina,V,14
+Boston College,V,15,Nebraska,V,20
+Louisiana,V,3,TCU,V,34
+Miami (OH),V,43,Colorado St.,V,17
+East Carolina,V,26,NC State,V,21
+Iowa,V,24,Missouri,V,27
+Penn St.,V,31,Boise St.,V,14
+Alabama,V,13,Michigan,V,19
+South Carolina,V,17,Illinois,V,21
+Louisville,V,35,Washington,V,34
+Baylor,V,31,LSU,V,44
+Ohio St.,V,41,Oregon,V,21
+Texas,V,39,Arizona St.,V,31
+Duke,V,20,Ole Miss,V,52
+Georgia,V,10,Notre Dame,V,23
