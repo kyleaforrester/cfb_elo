@@ -122,10 +122,10 @@ def calculate_win_50_elo(games_played, opponent_elos):
     max_elo = max(opponent_elos)
     guess_elo = (min_elo + max_elo) / 2
     expected_win_percentage = calculate_expected_win_percentage(games_played, guess_elo, opponent_elos)
-    while expected_win_percentage < 0.4999 or expected_win_percentage > 0.5001:
-        if expected_win_percentage < 0.4999:
+    while expected_win_percentage < 0.49999 or expected_win_percentage > 0.50001:
+        if expected_win_percentage < 0.49999:
             min_elo = guess_elo
-        elif expected_win_percentage > 0.5001:
+        elif expected_win_percentage > 0.50001:
             max_elo = guess_elo
         guess_elo = (min_elo + max_elo) / 2
         expected_win_percentage = calculate_expected_win_percentage(games_played, guess_elo, opponent_elos)
@@ -174,12 +174,19 @@ if __name__ == '__main__':
             continue
         elif len(instr) == 0:
             continue
-        elif instr.startswith('#setrate '):
-            learning_rate = int(instr.split('#setrate ')[1])
-            for key in games_played.keys():
-                games_played[key] = [0,0]
+        elif instr.startswith('#newseason'):
             for key in history.keys():
                 history[key] = []
+            for key in games_played.keys():
+                games_played[key] = [0,0]
+        elif instr.startswith('#squash '):
+            squash_amount = float(instr.split('#squash ')[1])
+            for team in elo_ratings.keys():
+                old_elo = elo_ratings[team][-1]
+                new_elo = old_elo + squash_amount*(1500 - old_elo)
+                elo_ratings[team].append(new_elo)
+        elif instr.startswith('#setrate '):
+            learning_rate = int(instr.split('#setrate ')[1])
         elif instr.startswith('#add '):
             add_team(instr, elo_ratings, games_played, history)
         elif instr.startswith('#end'):

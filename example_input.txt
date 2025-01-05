@@ -11,7 +11,9 @@
 // 2017
 // Learning rates are set higher at the start of a season
 // since a lot of roster turnover has occurred.
+#newseason
 #setrate 2
+#squash 0.25
 Tennessee,V,20,Florida,H,26
 Georgia,H,41,Tennessee,V,0
 South Carolina,V,15,Tennessee,H,9
@@ -20,7 +22,9 @@ Georgia,H,24,South Carolina,V,10
 South Carolina,H,28,Florida,V,20
 
 // 2018
+#newseason
 #setrate 2
+#squash 0.25
 Georgia,V,41,South Carolina,H,17
 Florida,V,47,Tennessee,H,21
 Georgia,H,38,Tennessee,V,12
@@ -29,7 +33,10 @@ South Carolina,H,27,Tennessee,V,24
 Florida,H,35,South Carolina,V,31
 
 // 2019
+#newseason
 #setrate 2
+#squash 0.25
+
 
 // We can end the elo file at any point with the below command.  This halts elo calculations at this point.
 #end
