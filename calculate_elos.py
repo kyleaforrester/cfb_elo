@@ -5,7 +5,7 @@ import math
 import generate_html
 
 def parse_input_file():
-    if len(sys.argv) != 2:
+    if len(sys.argv) < 2:
         print('Incorrect usage.')
         print('Example usage: ./myscript.py input.txt')
         sys.exit(1)
@@ -162,7 +162,7 @@ def calculate_win_50_elo_present(games_played, history, elo_ratings):
         win_50[team] = calculate_win_50_elo(games_played[team], opponent_elos)
     return win_50
 
-if __name__ == '__main__':
+def calculate_elos():
     instructions = parse_input_file()
 
     learning_rate = 1
@@ -201,4 +201,8 @@ if __name__ == '__main__':
     win_50_elo_past = calculate_win_50_elo_past(games_played, history)
     win_50_elo_present = calculate_win_50_elo_present(games_played, history, elo_ratings)
 
+    return [elo_ratings, history, win_50_elo_past, win_50_elo_present]
+
+if __name__ == '__main__':
+    elo_ratings, history, win_50_elo_past, win_50_elo_present = calculate_elos()
     print(generate_html.generate_html(elo_ratings, history, win_50_elo_past, win_50_elo_present))

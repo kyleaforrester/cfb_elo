@@ -1,0 +1,2 @@
+Notre Dame,V,-122,Penn St.,V,+102
+Ohio St.,V,-218,Texas,V,+180

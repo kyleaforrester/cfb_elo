@@ -83,7 +83,7 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present):
     teams_html = ''
     for team in enumerate(sorted(list(elo_ratings.keys()), key=lambda x: elo_ratings[x][-1], reverse=True)):
         elo_list = elo_ratings[team[1]]
-        rating = int(round(elo_list[-1],0))
+        rating = int(round(elo_list[-1],0) + 0.01)
         my_team_win50_past = int(round(win50_elo_past[team[1]], 0))
         my_team_win50_present = int(round(win50_elo_present[team[1]], 0))
 
@@ -155,3 +155,93 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present):
             </tr>'''
 
     return html.replace('{{TEAMS_HTML}}', teams_html)
+
+def generate_bets_html(bets, elo_ratings):
+    html = '''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Football Vegas Bets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #004d99;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #0066cc;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>College Football Vegas Bets</h1>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Winning Team</th>
+                <th>Winning Team Elo</th>
+                <th>Opponent</th>
+                <th>Opponent Elo</th>
+                <th>Line</th>
+                <th>Vegas Winchance</th>
+                <th>Actual Winchance</th>
+                <th>Payout</th>
+            </tr>
+        </thead>
+        <tbody>
+{{BETS_HTML}}
+        </tbody>
+    </table>
+</body>
+</html>'''
+
+    bets_html = ''
+    for enum_bet in enumerate(bets):
+        bet = enum_bet[1]
+        winning_team_elo = int(round(elo_ratings[bet.winning_team][-1], 0) + 0.01)
+        opponent_elo = int(round(elo_ratings[bet.opponent_team][-1], 0) + 0.01)
+        vegas_winchance = round(bet.vegas_winchance, 3)
+        actual_winchance = round(bet.actual_winchance, 3)
+        payout = round(bet.payout, 3)
+        bets_html += '''
+            <tr>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+            </tr>'''.format(enum_bet[0] + 1, bet.winning_team, winning_team_elo, bet.opponent_team, opponent_elo, bet.line, vegas_winchance, actual_winchance, payout)
+
+    return html.replace('{{BETS_HTML}}', bets_html)
