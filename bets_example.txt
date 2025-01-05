@@ -1,2 +1,16 @@
-Notre Dame,V,-122,Penn St.,V,+102
-Ohio St.,V,-218,Texas,V,+180
+South Alabama,V,-380,Western Mich.,V,+300
+Memphis,V,-102,West Virginia,V,-118
+Western Ky.,V,+124,James Madison,V,-148
+California,V,-120,UNLV,V,100
+Ga. Southern,V,-180,Sam Houston,V,+150
+Ohio,V,-130,Jacksonville St.,V,+110
+Tulane,V,+260,Florida,V,-325
+Indiana,V,+245,Notre Dame,H,-305
+SMU,V,+240,Penn St.,H,-298
+Clemson,V,+310,Texas,H,-395
+Tennessee,V,+195,Ohio St.,H,-238
+Coastal Carolina,V,+190,UTSA,V,-230
+NIU,V,-120,Fresno St.,V,100
+South Fla.,V,+114,San Jose St.,V,-135
+Pittsburgh,V,-325,Toledo,V,+260
+Rutgers,V,+190,Kansas St.,V,-230

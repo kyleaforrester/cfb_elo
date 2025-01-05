@@ -8,9 +8,9 @@ class Bet:
     def __init__(self, line, winning_team, win_home, opponent_team, opponent_home):
         self.line = int(line)
         self.winning_team = winning_team
-        self.winning_home = win_home
+        self.winning_home = win_home == 'H'
         self.opponent_team = opponent_team
-        self.opponent_home = opponent_home
+        self.opponent_home = opponent_home == 'H'
 
     def calculate_payout(self, elo_ratings):
         self.winning_elo = elo_ratings[self.winning_team][-1]
