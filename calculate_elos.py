@@ -4,6 +4,8 @@ import sys
 import math
 import generate_html
 
+HOME_FIELD_ELO = 50
+
 def parse_input_file():
     if len(sys.argv) < 2:
         print('Incorrect usage.')
@@ -23,9 +25,9 @@ def add_team(instr, elo_ratings, games_played, history):
 
 def predict_winchance(my_rating, my_home, enemy_rating, enemy_home):
     if my_home == True:
-        my_rating += 50
+        my_rating += HOME_FIELD_ELO
     if enemy_home == True:
-        enemy_rating += 50
+        enemy_rating += HOME_FIELD_ELO
 
     return 1 / (1 + 2**((enemy_rating - my_rating)/100))
 
@@ -141,9 +143,9 @@ def calculate_win_50_elo_past(games_played, history):
         for h in history[team]:
             enemy_elo = h[4]
             if h[0] == True:
-                enemy_elo -= 50
+                enemy_elo -= HOME_FIELD_ELO
             if h[3] == True:
-                enemy_elo += 50
+                enemy_elo += HOME_FIELD_ELO
             opponent_elos.append(enemy_elo)
         win_50[team] = calculate_win_50_elo(games_played[team], opponent_elos)
     return win_50
@@ -155,9 +157,9 @@ def calculate_win_50_elo_present(games_played, history, elo_ratings):
         for h in history[team]:
             enemy_elo = elo_ratings[h[2]][-1]
             if h[0] == True:
-                enemy_elo -= 50
+                enemy_elo -= HOME_FIELD_ELO
             if h[3] == True:
-                enemy_elo += 50
+                enemy_elo += HOME_FIELD_ELO
             opponent_elos.append(enemy_elo)
         win_50[team] = calculate_win_50_elo(games_played[team], opponent_elos)
     return win_50
@@ -185,6 +187,10 @@ def calculate_elos():
                 old_elo = elo_ratings[team][-1]
                 new_elo = old_elo + squash_amount*(1500 - old_elo)
                 elo_ratings[team].append(new_elo)
+        elif instr.startswith('#homefieldelo '):
+            global HOME_FIELD_ELO
+            elo_amount = int(instr.split('#homefieldelo ')[1])
+            HOME_FIELD_ELO = elo_amount
         elif instr.startswith('#setrate '):
             learning_rate = int(instr.split('#setrate ')[1])
         elif instr.startswith('#add '):
