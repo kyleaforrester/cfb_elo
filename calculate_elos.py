@@ -118,7 +118,7 @@ def calculate_win_50_elo(games_played, opponent_elos):
     # Returns the hypothetical elo required to win exactly 50% of games
     # Calculate a binary search in the elo space to find the win50 elo
     # Stop once you are within 0.01 of the ideal expected_win_percentage
-    min_elo = min(opponent_elos)
+    min_elo = -100
     max_elo = max(opponent_elos)
     guess_elo = (min_elo + max_elo) / 2
     expected_win_percentage = calculate_expected_win_percentage(games_played, guess_elo, opponent_elos)
