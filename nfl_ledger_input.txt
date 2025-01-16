@@ -595,3 +595,9 @@ Seahawks,V,30,Rams,H,25
 Vikings,V,9,Lions,H,31
 Browns,V,10,Ravens,H,35
 Bengals,V,19,Steelers,H,17
+Vikings,V,9,Rams,H,27
+Broncos,V,7,Bills,H,31
+Packers,V,10,Eagles,H,22
+Commanders,V,23,Buccaneers,H,20
+Chargers,V,12,Texans,H,32
+Steelers,V,14,Ravens,H,28

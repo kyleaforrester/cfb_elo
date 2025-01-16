@@ -1,4 +1,4 @@
-def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present):
+def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present, home_field_elo_boosts):
     html = '''
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +66,7 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present):
                 <th>Rank</th>
                 <th>Team Name</th>
                 <th>Elo Rating</th>
+                <th>Home Field Adv</th>
                 <th>Win 50 Past</th>
                 <th>Win 50 Present</th>
                 <th>Change Since Last Game</th>
@@ -84,6 +85,7 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present):
     for team in enumerate(sorted(list(elo_ratings.keys()), key=lambda x: elo_ratings[x][-1], reverse=True)):
         elo_list = elo_ratings[team[1]]
         rating = int(round(elo_list[-1],0) + 0.01)
+        home_field_adv = int(round(home_field_elo_boosts[team[1]], 0) + 0.01)
         my_team_win50_past = int(round(win50_elo_past[team[1]], 0))
         my_team_win50_present = int(round(win50_elo_present[team[1]], 0))
 
@@ -107,7 +109,8 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present):
                 <td>{}</td>
                 <td>{}</td>
                 <td>{}</td>
-            </tr>'''.format(team[0] + 1, team[1], rating, my_team_win50_past, my_team_win50_present, change_since_1, change_since_3, change_since_season)
+                <td>{}</td>
+            </tr>'''.format(team[0] + 1, team[1], rating, home_field_adv, my_team_win50_past, my_team_win50_present, change_since_1, change_since_3, change_since_season)
 
         teams_html += '''
             <tr class="subtable">
@@ -115,7 +118,7 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present):
                     <table>
                         <thead>
                             <tr>
-                                <th>Home</th>
+                                <th>Home Field Adv</th>
                                 <th>Elo</th>
                                 <th>Opponent</th>
                                 <th>Opponent Elo</th>
@@ -127,7 +130,7 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present):
                         </thead>
                         <tbody>'''
         for game in history[team[1]]:
-            is_home = game[0]
+            home_field = round(game[0] - game[3], 1)
             elo = round(game[1], 1)
             opponent = game[2]
             opponent_elo = round(game[4], 1)
@@ -146,7 +149,7 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present):
                                 <td>{}</td>
                                 <td>{}</td>
                                 <td>{}</td>
-                            </tr>'''.format(is_home, elo, opponent, opponent_elo, win_chance, score, result, elo_change)
+                            </tr>'''.format(home_field, elo, opponent, opponent_elo, win_chance, score, result, elo_change)
 
         teams_html += '''
                         </tbody>
@@ -208,6 +211,7 @@ def generate_bets_html(bets, elo_ratings):
                 <th>Rank</th>
                 <th>Winning Team</th>
                 <th>Winning Team Elo</th>
+                <th>Home Field Adv</th>
                 <th>Opponent</th>
                 <th>Opponent Elo</th>
                 <th>Line</th>
@@ -226,6 +230,7 @@ def generate_bets_html(bets, elo_ratings):
     bets_html = ''
     for enum_bet in enumerate(bets):
         bet = enum_bet[1]
+        home_field_adv = int(round(bet.home_field_adv) + 0.01)
         winning_team_elo = int(round(elo_ratings[bet.winning_team][-1], 0) + 0.01)
         opponent_elo = int(round(elo_ratings[bet.opponent_team][-1], 0) + 0.01)
         vegas_winchance = round(bet.vegas_winchance, 3)
@@ -242,6 +247,7 @@ def generate_bets_html(bets, elo_ratings):
                 <td>{}</td>
                 <td>{}</td>
                 <td>{}</td>
-            </tr>'''.format(enum_bet[0] + 1, bet.winning_team, winning_team_elo, bet.opponent_team, opponent_elo, bet.line, vegas_winchance, actual_winchance, payout)
+                <td>{}</td>
+            </tr>'''.format(enum_bet[0] + 1, bet.winning_team, winning_team_elo, home_field_adv, bet.opponent_team, opponent_elo, bet.line, vegas_winchance, actual_winchance, payout)
 
     return html.replace('{{BETS_HTML}}', bets_html)

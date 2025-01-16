@@ -1,138 +1,139 @@
-#add Air Force,1500
-#add Akron,1500
-#add Alabama,1500
-#add App State,1500
-#add Arizona,1500
-#add Arizona St.,1500
-#add Arkansas,1500
-#add Arkansas St.,1500
-#add Army West Point,1500
-#add Auburn,1500
-#add Ball St.,1500
-#add Baylor,1500
-#add Boise St.,1500
-#add Boston College,1500
-#add Bowling Green,1500
-#add Buffalo,1500
-#add BYU,1500
-#add California,1500
-#add Central Mich.,1500
-#add Charlotte,1500
-#add Cincinnati,1500
-#add Clemson,1500
-#add Coastal Carolina,1500
-#add Colorado,1500
-#add Colorado St.,1500
-#add Duke,1500
-#add East Carolina,1500
-#add Eastern Mich.,1500
-#add Fla. Atlantic,1500
-#add FIU,1500
-#add Florida,1500
-#add Florida St.,1500
-#add Fresno St.,1500
-#add Georgia,1500
-#add Ga. Southern,1500
-#add Georgia St.,1500
-#add Georgia Tech,1500
-#add Hawaii,1500
-#add Houston,1500
-#add Illinois,1500
-#add Indiana,1500
-#add Iowa,1500
-#add Iowa St.,1500
-#add Jacksonville St.,1500
-#add James Madison,1500
-#add Kansas,1500
-#add Kansas St.,1500
-#add Kennesaw St.,1500
-#add Kent St.,1500
-#add Kentucky,1500
-#add Liberty,1500
-#add Louisiana,1500
-#add ULM,1500
-#add Louisiana Tech,1500
-#add Louisville,1500
-#add LSU,1500
-#add Marshall,1500
-#add Maryland,1500
-#add Memphis,1500
-#add Miami (FL),1500
-#add Miami (OH),1500
-#add Michigan,1500
-#add Michigan St.,1500
-#add Middle Tenn.,1500
-#add Minnesota,1500
-#add Mississippi St.,1500
-#add Missouri,1500
-#add Navy,1500
-#add NC State,1500
-#add Nebraska,1500
-#add Nevada,1500
-#add New Mexico,1500
-#add New Mexico St.,1500
-#add North Carolina,1500
-#add North Texas,1500
-#add NIU,1500
-#add Northwestern,1500
-#add Notre Dame,1500
-#add Ohio,1500
-#add Ohio St.,1500
-#add Oklahoma,1500
-#add Oklahoma St.,1500
-#add Old Dominion,1500
-#add Ole Miss,1500
-#add Oregon,1500
-#add Oregon St.,1500
-#add Penn St.,1500
-#add Pittsburgh,1500
-#add Purdue,1500
-#add Rice,1500
-#add Rutgers,1500
-#add Sam Houston,1500
-#add San Diego St.,1500
-#add San Jose St.,1500
-#add SMU,1500
-#add South Alabama,1500
-#add South Carolina,1500
-#add South Fla.,1500
-#add Southern Miss.,1500
-#add Stanford,1500
-#add Syracuse,1500
-#add TCU,1500
-#add Temple,1500
-#add Tennessee,1500
-#add Texas,1500
-#add Texas A&M,1500
-#add Texas St.,1500
-#add Texas Tech,1500
-#add Toledo,1500
-#add Troy,1500
-#add Tulane,1500
-#add Tulsa,1500
-#add UAB,1500
-#add UCF,1500
-#add UCLA,1500
-#add UConn,1500
-#add Massachusetts,1500
-#add UNLV,1500
-#add Southern California,1500
-#add Utah,1500
-#add Utah St.,1500
-#add UTEP,1500
-#add UTSA,1500
-#add Vanderbilt,1500
-#add Virginia,1500
-#add Virginia Tech,1500
-#add Wake Forest,1500
-#add Washington,1500
-#add Washington St.,1500
-#add West Virginia,1500
-#add Western Ky.,1500
-#add Western Mich.,1500
-#add Wisconsin,1500
-#add Wyoming,1500
+#add Air Force,0
+#add Akron,0
+#add Alabama,0
+#add App State,0
+#add Arizona,0
+#add Arizona St.,0
+#add Arkansas,0
+#add Arkansas St.,0
+#add Army West Point,0
+#add Auburn,0
+#add Ball St.,0
+#add Baylor,0
+#add Boise St.,0
+#add Boston College,0
+#add Bowling Green,0
+#add Buffalo,0
+#add BYU,0
+#add California,0
+#add Central Mich.,0
+#add Charlotte,0
+#add Cincinnati,0
+#add Clemson,0
+#add Coastal Carolina,0
+#add Colorado,0
+#add Colorado St.,0
+#add Duke,0
+#add East Carolina,0
+#add Eastern Mich.,0
+#add Fla. Atlantic,0
+#add FIU,0
+#add Florida,0
+#add Florida St.,0
+#add Fresno St.,0
+#add Georgia,0
+#add Ga. Southern,0
+#add Georgia St.,0
+#add Georgia Tech,0
+#add Hawaii,0
+#add Houston,0
+#add Illinois,0
+#add Indiana,0
+#add Iowa,0
+#add Iowa St.,0
+#add Jacksonville St.,0
+#add James Madison,0
+#add Kansas,0
+#add Kansas St.,0
+#add Kennesaw St.,0
+#add Kent St.,0
+#add Kentucky,0
+#add Liberty,0
+#add Louisiana,0
+#add ULM,0
+#add Louisiana Tech,0
+#add Louisville,0
+#add LSU,0
+#add Marshall,0
+#add Maryland,0
+#add Memphis,0
+#add Miami (FL),0
+#add Miami (OH),0
+#add Michigan,0
+#add Michigan St.,0
+#add Middle Tenn.,0
+#add Minnesota,0
+#add Mississippi St.,0
+#add Missouri,0
+#add Navy,0
+#add NC State,0
+#add Nebraska,0
+#add Nevada,0
+#add New Mexico,0
+#add New Mexico St.,0
+#add North Carolina,0
+#add North Texas,0
+#add NIU,0
+#add Northwestern,0
+#add Notre Dame,0
+#add Ohio,0
+#add Ohio St.,0
+#add Oklahoma,0
+#add Oklahoma St.,0
+#add Old Dominion,0
+#add Ole Miss,0
+#add Oregon,0
+#add Oregon St.,0
+#add Penn St.,0
+#add Pittsburgh,0
+#add Purdue,0
+#add Rice,0
+#add Rutgers,0
+#add Sam Houston,0
+#add San Diego St.,0
+#add San Jose St.,0
+#add SMU,0
+#add South Alabama,0
+#add South Carolina,0
+#add South Fla.,0
+#add Southern Miss.,0
+#add Stanford,0
+#add Syracuse,0
+#add TCU,0
+#add Temple,0
+#add Tennessee,0
+#add Texas,0
+#add Texas A&M,0
+#add Texas St.,0
+#add Texas Tech,0
+#add Toledo,0
+#add Troy,0
+#add Tulane,0
+#add Tulsa,0
+#add UAB,0
+#add UCF,0
+#add UCLA,0
+#add UConn,0
+#add Massachusetts,0
+#add UNLV,0
+#add Southern California,0
+#add Utah,0
+#add Utah St.,0
+#add UTEP,0
+#add UTSA,0
+#add Vanderbilt,0
+#add Virginia,0
+#add Virginia Tech,0
+#add Wake Forest,0
+#add Washington,0
+#add Washington St.,0
+#add West Virginia,0
+#add Western Ky.,0
+#add Western Mich.,0
+#add Wisconsin,0
+#add Wyoming,0
 
+#homefieldelo 50
 // 2021 Season
 // Set rate to be pretty high since it's the first season
 #newseason
@@ -3762,3 +3763,8 @@ Ohio St.,V,41,Oregon,V,21
 Texas,V,39,Arizona St.,V,31
 Duke,V,20,Ole Miss,V,52
 Georgia,V,10,Notre Dame,V,23
+North Texas,V,28,Texas St.,V,30
+Minnesota,V,24,Virginia Tech,V,10
+Buffalo,V,26,Liberty,V,7
+Notre Dame,V,27,Penn St.,V,24
+Ohio St.,V,28,Texas,V,14
