@@ -1934,7 +1934,6 @@ LSU,V,63,Purdue,V,7
 Mississippi St.,V,19,Illinois,V,10
 TCU,V,7,Georgia,V,65
 
-#homefieldelo 50
 // 2023 Season
 #newseason
 San Jose St.,V,28,Southern California,H,56
