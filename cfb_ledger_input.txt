@@ -1034,6 +1034,7 @@ LSU,V,20,Kansas St.,V,42
 Georgia,V,33,Alabama,V,18
 
 // 2022 Season
+#squash 0.1
 #newseason
 Austin Peay,V,27,Western Ky.,H,38
 Nebraska,V,28,Northwestern,H,31
@@ -1935,6 +1936,7 @@ Mississippi St.,V,19,Illinois,V,10
 TCU,V,7,Georgia,V,65
 
 // 2023 Season
+#squash 0.1
 #newseason
 San Jose St.,V,28,Southern California,H,56
 Navy,V,3,Notre Dame,V,42
@@ -2848,6 +2850,7 @@ Iowa,V,0,Tennessee,V,35
 Washington,V,13,Michigan,V,34
 
 // 2024 Season
+#squash 0.1
 #newseason
 Florida St.,V,21,Georgia Tech,V,24
 Montana St.,V,35,New Mexico,H,31
@@ -3767,3 +3770,4 @@ Minnesota,V,24,Virginia Tech,V,10
 Buffalo,V,26,Liberty,V,7
 Notre Dame,V,27,Penn St.,V,24
 Ohio St.,V,28,Texas,V,14
+Ohio St.,V,34,Notre Dame,V,23

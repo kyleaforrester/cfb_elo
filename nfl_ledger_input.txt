@@ -322,6 +322,7 @@ Lions,V,31,49ers,H,34
 49ers,V,22,Chiefs,V,25
 
 // 2024 Season
+#squash 0.2
 #newseason
 Jets,V,19,49ers,H,32
 Cardinals,V,28,Bills,H,34
@@ -601,3 +602,9 @@ Packers,V,10,Eagles,H,22
 Commanders,V,23,Buccaneers,H,20
 Chargers,V,12,Texans,H,32
 Steelers,V,14,Ravens,H,28
+Rams,V,22,Eagles,H,28
+Ravens,V,25,Bills,H,27
+Texans,V,14,Chiefs,H,23
+Commanders,V,45,Lions,H,31
+Commanders,V,23,Eagles,H,55
+Bills,V,29,Chiefs,H,32

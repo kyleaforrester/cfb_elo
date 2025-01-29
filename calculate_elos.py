@@ -195,7 +195,7 @@ def calculate_elos():
             squash_amount = float(instr.split('#squash ')[1])
             for team in elo_ratings.keys():
                 old_elo = elo_ratings[team][-1]
-                new_elo = old_elo + squash_amount*(1500 - old_elo)
+                new_elo = old_elo + squash_amount*(0 - old_elo)
                 elo_ratings[team].append(new_elo)
         elif instr.startswith('#homefieldelo '):
             global HOME_FIELD_ELO
