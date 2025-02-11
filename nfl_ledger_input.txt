@@ -608,3 +608,4 @@ Texans,V,14,Chiefs,H,23
 Commanders,V,45,Lions,H,31
 Commanders,V,23,Eagles,H,55
 Bills,V,29,Chiefs,H,32
+Eagles,V,40,Chiefs,V,22
