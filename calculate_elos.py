@@ -5,7 +5,10 @@ import math
 import generate_html
 
 HOME_FIELD_ELO = 50
+HOME_FIELD_MULTIPLIER = 5
 MAX_ELO_CHANGE = 150
+POINTS_PER_SCORE = 17 / 3
+LEARNING_RATE_DECAY = 0.5
 
 def parse_input_file():
     if len(sys.argv) < 2:
@@ -51,9 +54,7 @@ def result_winchance_integer_instances(my_score, enemy_score, scoring_instances)
     return my_sum
 
 def result_winchance(my_score, enemy_score):
-    td_fg_ratio = 2
-    points_per_score = (7*td_fg_ratio + 3) / (1 + td_fg_ratio)
-    scoring_instances = (my_score + enemy_score) / points_per_score
+    scoring_instances = (my_score + enemy_score) / POINTS_PER_SCORE
 
     floor = math.floor(scoring_instances)
     ceil = math.ceil(scoring_instances)
@@ -66,7 +67,7 @@ def result_winchance(my_score, enemy_score):
         return floor_fraction + ceil_fraction
 
 def elo_change(games_played, winchance_diff, learning_rate):
-    new_rate = (learning_rate - 1) * (1/2)**games_played + 1
+    new_rate = (learning_rate - 1) * (LEARNING_RATE_DECAY)**games_played + 1
 
     return winchance_diff * MAX_ELO_CHANGE * new_rate
 
@@ -84,7 +85,7 @@ def calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, games_playe
             games_played[a_name][1] += 1
         if b_name in games_played:
             games_played[b_name][1] += 1
-        print('Skipping game {} vs {}'.format(a_name, b_name), file=sys.stderr)
+        #print('Skipping game {} vs {}'.format(a_name, b_name), file=sys.stderr)
         return
 
     a_home_field = 0
@@ -107,10 +108,10 @@ def calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, games_playe
     elo_ratings[b_name].append(elo_ratings[b_name][-1] + b_elo_change)
 
     if a_home:
-        new_val = home_field_elo_boosts[a_name] + 5 * (a_elo_change / MAX_ELO_CHANGE)
+        new_val = home_field_elo_boosts[a_name] + HOME_FIELD_MULTIPLIER * (a_result_winchance - a_expected_winchance)
         home_field_elo_boosts[a_name] = max(0, new_val)
     if b_home:
-        new_val = home_field_elo_boosts[b_name] + 5 * (b_elo_change / MAX_ELO_CHANGE)
+        new_val = home_field_elo_boosts[b_name] + HOME_FIELD_MULTIPLIER * (b_result_winchance - b_expected_winchance)
         home_field_elo_boosts[b_name] = max(0, new_val)
 
     games_played[a_name][0] += 1
@@ -199,12 +200,24 @@ def calculate_elos():
                 elo_ratings[team].append(new_elo)
         elif instr.startswith('#homefieldelo '):
             global HOME_FIELD_ELO
-            elo_amount = int(instr.split('#homefieldelo ')[1])
+            elo_amount = float(instr.split('#homefieldelo ')[1])
             HOME_FIELD_ELO = elo_amount
             for team in home_field_elo_boosts.keys():
                 home_field_elo_boosts[team] = elo_amount
+        elif instr.startswith('#maxelochange '):
+            global MAX_ELO_CHANGE
+            MAX_ELO_CHANGE = float(instr.split('#maxelochange ')[1])
+        elif instr.startswith('#homefieldmultiplier '):
+            global HOME_FIELD_MULTIPLIER
+            HOME_FIELD_MULTIPLIER = float(instr.split('#homefieldmultiplier ')[1])
+        elif instr.startswith('#pointsperscore '):
+            global POINTS_PER_SCORE
+            POINTS_PER_SCORE = float(instr.split('#pointsperscore ')[1])
         elif instr.startswith('#setrate '):
-            learning_rate = int(instr.split('#setrate ')[1])
+            learning_rate = float(instr.split('#setrate ')[1])
+        elif instr.startswith('#setratedecay '):
+            global LEARNING_RATE_DECAY
+            LEARNING_RATE_DECAY = float(instr.split('#setratedecay ')[1])
         elif instr.startswith('#add '):
             add_team(instr, elo_ratings, home_field_elo_boosts, games_played, history)
         elif instr.startswith('#end'):
