@@ -133,16 +133,16 @@
 #add Wisconsin,0
 #add Wyoming,0
 
-#maxelochange 60.87
-#homefieldelo 38.25
-#homefieldmultiplier 10.65
-#pointsperscore 7.903
-#setratedecay 0.7478
+#maxelochange 54.96
+#homefieldelo 38.11
+#homefieldmultiplier 11.80
+#pointsperscore 8.800
+#setratedecay 0.7603
 
 // 2021 Season
 // Set rate to be pretty high since it's the first season
 #newseason
-#setrate 3.952
+#setrate 4.447
 Nebraska,V,22,Illinois,H,30
 UConn,V,0,Fresno St.,H,45
 Hawaii,V,10,UCLA,H,44
@@ -1039,9 +1039,9 @@ LSU,V,20,Kansas St.,V,42
 Georgia,V,33,Alabama,V,18
 
 // 2022 Season
-#squash 0.002277
+#squash -0.1225
 #newseason
-#setrate 3.952
+#setrate 4.447
 Austin Peay,V,27,Western Ky.,H,38
 Nebraska,V,28,Northwestern,H,31
 Idaho St.,V,21,UNLV,H,52
@@ -1942,9 +1942,9 @@ Mississippi St.,V,19,Illinois,V,10
 TCU,V,7,Georgia,V,65
 
 // 2023 Season
-#squash 0.002277
+#squash -0.1225
 #newseason
-#setrate 3.952
+#setrate 4.447
 San Jose St.,V,28,Southern California,H,56
 Navy,V,3,Notre Dame,V,42
 UTEP,V,14,Jacksonville St.,H,17
@@ -2857,9 +2857,9 @@ Iowa,V,0,Tennessee,V,35
 Washington,V,13,Michigan,V,34
 
 // 2024 Season
-#squash 0.002277
+#squash -0.1225
 #newseason
-#setrate 3.952
+#setrate 4.447
 Florida St.,V,21,Georgia Tech,V,24
 Montana St.,V,35,New Mexico,H,31
 SMU,V,29,Nevada,H,24

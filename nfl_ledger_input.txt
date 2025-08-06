@@ -31,15 +31,15 @@
 #add Ravens,0
 #add Chiefs,0
 
-#maxelochange 66.04
-#homefieldelo 25.07
-#homefieldmultiplier 0.1302
-#pointsperscore 1.860
-#setratedecay 0.4714
+#maxelochange 66.27
+#homefieldelo 25.19
+#homefieldmultiplier -2.138
+#pointsperscore 1.851
+#setratedecay 0.4468
 
 // 2021 Season
 #newseason
-#setrate 0.3391
+#setrate 0.3451
 Ravens,V,27,Raiders,H,33
 Cardinals,V,38,Titans,H,13
 Jaguars,V,21,Texans,H,37
@@ -317,9 +317,9 @@ Bengals,V,27,Chiefs,H,24
 Rams,H,23,Bengals,V,20
 
 // 2022 Season
-#squash 0.2235
+#squash 0.2212
 #newseason
-#setrate 0.3391
+#setrate 0.3451
 Broncos,V,16,Seahawks,H,17
 Ravens,V,24,Jets,H,9
 Browns,V,26,Panthers,H,24
@@ -606,9 +606,9 @@ Bengals,V,20,Chiefs,H,23
 Chiefs,V,38,Eagles,V,35
 
 // 2023 Season
-#squash 0.2235
+#squash 0.2212
 #newseason
-#setrate 0.3391
+#setrate 0.3451
 Bills,V,16,Jets,H,22
 Cardinals,V,16,Commanders,H,20
 Panthers,V,10,Falcons,H,24
@@ -896,9 +896,9 @@ Lions,V,31,49ers,H,34
 49ers,V,22,Chiefs,V,25
 
 // 2024 Season
-#squash 0.2235
+#squash 0.2212
 #newseason
-#setrate 0.3391
+#setrate 0.3451
 Jets,V,19,49ers,H,32
 Cardinals,V,28,Bills,H,34
 Panthers,V,10,Saints,H,47
