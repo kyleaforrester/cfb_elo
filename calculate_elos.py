@@ -85,7 +85,7 @@ def calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, games_playe
             games_played[a_name][1] += 1
         if b_name in games_played:
             games_played[b_name][1] += 1
-        #print('Skipping game {} vs {}'.format(a_name, b_name), file=sys.stderr)
+        print('Skipping game {} vs {}'.format(a_name, b_name), file=sys.stderr)
         return
 
     a_home_field = 0
@@ -157,7 +157,10 @@ def calculate_win_50_elo_past(games_played, history):
             # Home Field Advantage
             enemy_elo += h[3] - h[0]
             opponent_elos.append(enemy_elo)
-        win_50[team] = calculate_win_50_elo(games_played[team], opponent_elos)
+        if len(opponent_elos) > 0:
+            win_50[team] = calculate_win_50_elo(games_played[team], opponent_elos)
+        else:
+            win_50[team] = 0
     return win_50
 
 def calculate_win_50_elo_present(games_played, history, elo_ratings, home_field_elo_boosts):
@@ -171,7 +174,10 @@ def calculate_win_50_elo_present(games_played, history, elo_ratings, home_field_
             if h[3] > 0:
                 enemy_elo += home_field_elo_boosts[h[2]]
             opponent_elos.append(enemy_elo)
-        win_50[team] = calculate_win_50_elo(games_played[team], opponent_elos)
+        if len(opponent_elos) > 0:
+            win_50[team] = calculate_win_50_elo(games_played[team], opponent_elos)
+        else:
+            win_50[team] = 0
     return win_50
 
 def calculate_elos():
