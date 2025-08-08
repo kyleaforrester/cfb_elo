@@ -69,7 +69,7 @@ def calculate_error(params):
 
 
 # Parameters for [MAX_ELO_CHANGE, HOME_FIELD_ELO, SQUASH_FRACTION]
-parameters = {'MAX_ELO_CHANGE': random.random() * 75 + 75, 'HOME_FIELD_ELO': random.random() * 20 + 20, 'HOME_FIELD_MULTIPLIER': random.random() * 2 + 2, 'POINTS_PER_SCORE': random.random() * 4 + 3, 'LEARNING_RATE_INITIAL': random.random() * 2 + 1, 'LEARNING_RATE_DECAY': random.random(), 'SQUASH_FRACTION': random.random() * 0.1 + 0.05}
+parameters = {'MAX_ELO_CHANGE': random.random() * 15 + 50, 'HOME_FIELD_ELO': random.random() * 52 - 12, 'HOME_FIELD_MULTIPLIER': random.random() * 13 + 12, 'POINTS_PER_SCORE': random.random() * 7 + 2, 'LEARNING_RATE_INITIAL': random.random() * 4 + 0.3, 'LEARNING_RATE_DECAY': random.random()*0.3 + 0.5, 'SQUASH_FRACTION': random.random() * 0.22 - 0.12}
 
 error = calculate_error(parameters)
 print('Iteration -1. Parameters: {}, Error: {}'.format(parameters, error))
