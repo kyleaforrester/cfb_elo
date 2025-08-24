@@ -10,7 +10,7 @@ import sys
 
 def format_website():
     text = sys.stdin.read()
-    pattern = re.compile("\n\n    ([a-zA-Z\.\'\-0-9 \(\)\&]+) ([0-9]*)\n    ([a-zA-Z\.\'\-0-9 \(\)\&]+) ([0-9]*)\n", re.MULTILINE)
+    pattern = re.compile("\n\n    [0-9]*([a-zA-Z\.\'\- \(\)\&]+)([0-9]*)\n    [0-9]*([a-zA-Z\.\'\- \(\)\&]+)([0-9]*)\n", re.MULTILINE)
 
     for match in re.finditer(pattern, text):
         visit_team, visit_score, home_team, home_score = match.groups()

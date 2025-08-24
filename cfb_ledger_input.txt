@@ -23,6 +23,7 @@
 #add Coastal Carolina,0
 #add Colorado,0
 #add Colorado St.,0
+#add Delaware,0
 #add Duke,0
 #add East Carolina,0
 #add Eastern Mich.,0
@@ -65,6 +66,7 @@
 #add Minnesota,0
 #add Mississippi St.,0
 #add Missouri,0
+#add Missouri St.,0
 #add Navy,0
 #add NC State,0
 #add Nebraska,0
@@ -3779,3 +3781,13 @@ Buffalo,V,26,Liberty,V,7
 Notre Dame,V,27,Penn St.,V,24
 Ohio St.,V,28,Texas,V,14
 Ohio St.,V,34,Notre Dame,V,23
+
+// 2025 Season
+#squash -0.1225
+#newseason
+#setrate 4.447
+Iowa St.,V,24,Kansas St.,V,21
+Idaho St.,V,31,UNLV,H,38
+Fresno St.,V,7,Kansas,H,31
+Sam Houston,V,24,Western Ky.,H,41
+Stanford,V,20,Hawaii,H,23
