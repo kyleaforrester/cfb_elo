@@ -50,10 +50,10 @@ def parse_betting_file():
     return bets
 
 if __name__ == '__main__':
-    elo_ratings, history, win_50_elo_past, win_50_elo_present, home_field_elo_boosts = calculate_elos.calculate_elos()
+    elo_ratings, history, win_50_elo_past, win_50_elo_present, home_field_elo_boosts, name = calculate_elos.calculate_elos()
 
     bets = parse_betting_file()
     for bet in bets:
         bet.calculate_payout(elo_ratings, home_field_elo_boosts)
     bets = sorted(bets, key=lambda x: x.payout, reverse=True)
-    print(generate_html.generate_bets_html(bets, elo_ratings))
+    print(generate_html.generate_bets_html(bets, elo_ratings, name))

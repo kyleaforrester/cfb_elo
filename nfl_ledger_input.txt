@@ -1,3 +1,5 @@
+#name Herman's Huddle
+
 #add Jets,0
 #add 49ers,0
 #add Cardinals,0
@@ -1184,3 +1186,8 @@ Commanders,V,45,Lions,H,31
 Commanders,V,23,Eagles,H,55
 Bills,V,29,Chiefs,H,32
 Eagles,V,40,Chiefs,V,22
+
+// 2025 Season
+#squash 0.1839
+#newseason
+#setrate 0.3493

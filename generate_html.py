@@ -1,11 +1,11 @@
-def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present, home_field_elo_boosts):
+def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present, home_field_elo_boosts, name):
     html = '''
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Football Elo Ratings</title>
+    <title>{{NAME}}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,7 +58,7 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present, home_
 </head>
 <body>
     <header>
-        <h1>College Football Elo Ratings</h1>
+        <h1>{{NAME}}</h1>
     </header>
     <table>
         <thead>
@@ -157,16 +157,17 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present, home_
                 </td>
             </tr>'''
 
+    html = html.replace('{{NAME}}', name)
     return html.replace('{{TEAMS_HTML}}', teams_html)
 
-def generate_bets_html(bets, elo_ratings):
+def generate_bets_html(bets, elo_ratings, name):
     html = '''
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Football Vegas Bets</title>
+    <title>{{NAME}} Hunches</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -203,7 +204,7 @@ def generate_bets_html(bets, elo_ratings):
 </head>
 <body>
     <header>
-        <h1>College Football Vegas Bets</h1>
+        <h1>{{NAME}} Hunches</h1>
     </header>
     <table>
         <thead>
@@ -250,4 +251,5 @@ def generate_bets_html(bets, elo_ratings):
                 <td>{}</td>
             </tr>'''.format(enum_bet[0] + 1, bet.winning_team, winning_team_elo, home_field_adv, bet.opponent_team, opponent_elo, bet.line, vegas_winchance, actual_winchance, payout)
 
+    html = html.replace('{{NAME}}', name)
     return html.replace('{{BETS_HTML}}', bets_html)

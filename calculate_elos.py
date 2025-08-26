@@ -188,6 +188,7 @@ def calculate_elos():
     elo_ratings = {}
     home_field_elo_boosts = {}
     history = {}
+    name = 'Elo Ratings'
     for instr in instructions:
         if instr.startswith('//'):
             continue
@@ -226,6 +227,8 @@ def calculate_elos():
             LEARNING_RATE_DECAY = float(instr.split('#setratedecay ')[1])
         elif instr.startswith('#add '):
             add_team(instr, elo_ratings, home_field_elo_boosts, games_played, history)
+        elif instr.startswith('#name '):
+            name = instr.split('#name ')[1]
         elif instr.startswith('#end'):
             break
         elif len(instr.split(',')) == 6:
@@ -238,8 +241,8 @@ def calculate_elos():
     win_50_elo_past = calculate_win_50_elo_past(games_played, history)
     win_50_elo_present = calculate_win_50_elo_present(games_played, history, elo_ratings, home_field_elo_boosts)
 
-    return [elo_ratings, history, win_50_elo_past, win_50_elo_present, home_field_elo_boosts]
+    return [elo_ratings, history, win_50_elo_past, win_50_elo_present, home_field_elo_boosts, name]
 
 if __name__ == '__main__':
-    elo_ratings, history, win_50_elo_past, win_50_elo_present, home_field_elo_boosts = calculate_elos()
-    print(generate_html.generate_html(elo_ratings, history, win_50_elo_past, win_50_elo_present, home_field_elo_boosts))
+    elo_ratings, history, win_50_elo_past, win_50_elo_present, home_field_elo_boosts, name = calculate_elos()
+    print(generate_html.generate_html(elo_ratings, history, win_50_elo_past, win_50_elo_present, home_field_elo_boosts, name))

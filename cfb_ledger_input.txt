@@ -1,3 +1,5 @@
+#name College Football Elo Ratings
+
 #add Air Force,0
 #add Akron,0
 #add Alabama,0
