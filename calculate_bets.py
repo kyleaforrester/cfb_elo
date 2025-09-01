@@ -33,7 +33,7 @@ class Bet:
             won = 100 * self.actual_winchance
             lost = -self.line * (1 - self.actual_winchance)
 
-        self.payout = won / lost
+        self.payout = won - lost
 
 def parse_betting_file():
     if len(sys.argv) < 3:

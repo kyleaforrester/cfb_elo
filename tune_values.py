@@ -48,6 +48,8 @@ def calculate_error(params):
             continue
         elif instr.startswith('#add '):
             calculate_elos.add_team(instr, elo_ratings, home_field_elo_boosts, games_played, history)
+        elif instr.startswith('#name '):
+            continue
         elif instr.startswith('#end'):
             break
         elif len(instr.split(',')) == 6:
@@ -69,7 +71,7 @@ def calculate_error(params):
 
 
 # Parameters for [MAX_ELO_CHANGE, HOME_FIELD_ELO, SQUASH_FRACTION]
-parameters = {'MAX_ELO_CHANGE': random.random() * 15 + 50, 'HOME_FIELD_ELO': random.random() * 52 - 12, 'HOME_FIELD_MULTIPLIER': random.random() * 13 + 12, 'POINTS_PER_SCORE': random.random() * 7 + 2, 'LEARNING_RATE_INITIAL': random.random() * 4 + 0.3, 'LEARNING_RATE_DECAY': random.random()*0.3 + 0.5, 'SQUASH_FRACTION': random.random() * 0.22 - 0.12}
+parameters = {'MAX_ELO_CHANGE': random.random() * 15 + 50, 'HOME_FIELD_ELO': 20, 'HOME_FIELD_MULTIPLIER': random.random() * 13 + 12, 'POINTS_PER_SCORE': random.random() * 7 + 2, 'LEARNING_RATE_INITIAL': random.random() * 4 + 0.3, 'LEARNING_RATE_DECAY': random.random()*0.3 + 0.5, 'SQUASH_FRACTION': random.random() * 0.22 - 0.12}
 
 error = calculate_error(parameters)
 print('Iteration -1. Parameters: {}, Error: {}'.format(parameters, error))

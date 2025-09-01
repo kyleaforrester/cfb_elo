@@ -218,7 +218,7 @@ def generate_bets_html(bets, elo_ratings, name):
                 <th>Line</th>
                 <th>Vegas Winchance</th>
                 <th>Actual Winchance</th>
-                <th>Payout</th>
+                <th>Payout ($)</th>
             </tr>
         </thead>
         <tbody>
@@ -248,7 +248,7 @@ def generate_bets_html(bets, elo_ratings, name):
                 <td>{}</td>
                 <td>{}</td>
                 <td>{}</td>
-                <td>{}</td>
+                <td>{:.2f}</td>
             </tr>'''.format(enum_bet[0] + 1, bet.winning_team, winning_team_elo, home_field_adv, bet.opponent_team, opponent_elo, bet.line, vegas_winchance, actual_winchance, payout)
 
     html = html.replace('{{NAME}}', name)
