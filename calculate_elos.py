@@ -9,6 +9,12 @@ HOME_FIELD_MULTIPLIER = 5
 MAX_ELO_CHANGE = 150
 POINTS_PER_SCORE = 17 / 3
 LEARNING_RATE_DECAY = 0.5
+SIGMOID_BASE1 = 1
+SIGMOID_EXPONENT1 = 1
+SIGMOID_BASE2 = 1
+SIGMOID_EXPONENT2 = 1
+SIGMOID_CONSTANT1 = 1
+SIGMOID_CONSTANT2 = 1
 
 def parse_input_file():
     if len(sys.argv) < 2:
@@ -66,6 +72,18 @@ def result_winchance(my_score, enemy_score):
         ceil_fraction = (scoring_instances - floor) * result_winchance_integer_instances(my_score, enemy_score, ceil)
         return floor_fraction + ceil_fraction
 
+def result_winchance_sigmoid(my_score, enemy_score):
+    # 1 / (1 + e^(e*(b-a)/(b+a)))
+    if my_score == enemy_score:
+        return 0.5
+    elif enemy_score == 0:
+        return 1.0
+    elif my_score < enemy_score:
+        return 1.0 - result_winchance_sigmoid(enemy_score, my_score)
+
+    #return max(0.5, 1 / (1 + (SIGMOID_BASE1*my_score**SIGMOID_EXPONENT1 + SIGMOID_CONSTANT1)**((enemy_score - my_score)/(enemy_score + my_score))))
+    return 1 / (1 + (my_score/enemy_score)**(SIGMOID_BASE1*-1*my_score**SIGMOID_EXPONENT1/(enemy_score**SIGMOID_EXPONENT2)))
+
 def elo_change(games_played, winchance_diff, learning_rate):
     new_rate = (learning_rate - 1) * (LEARNING_RATE_DECAY)**games_played + 1
 
@@ -98,7 +116,7 @@ def calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, games_playe
     a_expected_winchance = predict_winchance(elo_ratings[a_name][-1] + a_home_field, elo_ratings[b_name][-1] + b_home_field)
     b_expected_winchance = 1 - a_expected_winchance
 
-    a_result_winchance = result_winchance(a_score, b_score)
+    a_result_winchance = result_winchance_sigmoid(a_score, b_score)
     b_result_winchance = 1 - a_result_winchance
 
     a_elo_change = elo_change(games_played[a_name][0], a_result_winchance - a_expected_winchance, learning_rate)
@@ -220,6 +238,24 @@ def calculate_elos():
         elif instr.startswith('#pointsperscore '):
             global POINTS_PER_SCORE
             POINTS_PER_SCORE = float(instr.split('#pointsperscore ')[1])
+        elif instr.startswith('#sigmoidbase1 '):
+            global SIGMOID_BASE1
+            SIGMOID_BASE1 = float(instr.split('#sigmoidbase1 ')[1])
+        elif instr.startswith('#sigmoidexponent1 '):
+            global SIGMOID_EXPONENT1
+            SIGMOID_EXPONENT1 = float(instr.split('#sigmoidexponent1 ')[1])
+        elif instr.startswith('#sigmoidbase2 '):
+            global SIGMOID_BASE2
+            SIGMOID_BASE2 = float(instr.split('#sigmoidbase2 ')[1])
+        elif instr.startswith('#sigmoidexponent2 '):
+            global SIGMOID_EXPONENT2
+            SIGMOID_EXPONENT2 = float(instr.split('#sigmoidexponent2 ')[1])
+        elif instr.startswith('#sigmoidconstant1 '):
+            global SIGMOID_CONSTANT1
+            SIGMOID_CONSTANT1 = float(instr.split('#sigmoidconstant1 ')[1])
+        elif instr.startswith('#sigmoidconstant2 '):
+            global SIGMOID_CONSTANT2
+            SIGMOID_CONSTANT2 = float(instr.split('#sigmoidconstant2 ')[1])
         elif instr.startswith('#setrate '):
             learning_rate = float(instr.split('#setrate ')[1])
         elif instr.startswith('#setratedecay '):

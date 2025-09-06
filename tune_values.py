@@ -9,6 +9,12 @@ def calculate_error(params):
     calculate_elos.HOME_FIELD_MULTIPLIER = params['HOME_FIELD_MULTIPLIER']
     calculate_elos.POINTS_PER_SCORE = params['POINTS_PER_SCORE']
     calculate_elos.LEARNING_RATE_DECAY = params['LEARNING_RATE_DECAY']
+    calculate_elos.SIGMOID_BASE1 = params['SIGMOID_BASE1']
+    calculate_elos.SIGMOID_EXPONENT1 = params['SIGMOID_EXPONENT1']
+    calculate_elos.SIGMOID_BASE2 = params['SIGMOID_BASE2']
+    calculate_elos.SIGMOID_EXPONENT2 = params['SIGMOID_EXPONENT2']
+    calculate_elos.SIGMOID_CONSTANT1 = params['SIGMOID_CONSTANT1']
+    calculate_elos.SIGMOID_CONSTANT2 = params['SIGMOID_CONSTANT2']
 
     instructions = calculate_elos.parse_input_file()
 
@@ -42,6 +48,18 @@ def calculate_error(params):
             continue
         elif instr.startswith('#pointsperscore '):
             continue
+        elif instr.startswith('#sigmoidbase1 '):
+            continue
+        elif instr.startswith('#sigmoidexponent1 '):
+            continue
+        elif instr.startswith('#sigmoidbase2 '):
+            continue
+        elif instr.startswith('#sigmoidexponent2 '):
+            continue
+        elif instr.startswith('#sigmoidconstant1 '):
+            continue
+        elif instr.startswith('#sigmoidconstant2 '):
+            continue
         elif instr.startswith('#setrate '):
             learning_rate = params['LEARNING_RATE_INITIAL']
         elif instr.startswith('#setratedecay '):
@@ -71,7 +89,7 @@ def calculate_error(params):
 
 
 # Parameters for [MAX_ELO_CHANGE, HOME_FIELD_ELO, SQUASH_FRACTION]
-parameters = {'MAX_ELO_CHANGE': random.random() * 15 + 50, 'HOME_FIELD_ELO': 20, 'HOME_FIELD_MULTIPLIER': random.random() * 13 + 12, 'POINTS_PER_SCORE': random.random() * 7 + 2, 'LEARNING_RATE_INITIAL': random.random() * 4 + 0.3, 'LEARNING_RATE_DECAY': random.random()*0.3 + 0.5, 'SQUASH_FRACTION': random.random() * 0.22 - 0.12}
+parameters = {'MAX_ELO_CHANGE': random.random() * 15 + 50, 'HOME_FIELD_ELO': 20, 'HOME_FIELD_MULTIPLIER': 10, 'POINTS_PER_SCORE': random.random() * 7 + 2, 'SIGMOID_BASE1': 1, 'SIGMOID_EXPONENT1': 1, 'SIGMOID_BASE2': 1, 'SIGMOID_EXPONENT2': 1, 'SIGMOID_CONSTANT1': 1, 'SIGMOID_CONSTANT2': 1, 'LEARNING_RATE_INITIAL': 3.5, 'LEARNING_RATE_DECAY': 1, 'SQUASH_FRACTION': -0.1}
 
 error = calculate_error(parameters)
 print('Iteration -1. Parameters: {}, Error: {}'.format(parameters, error))
@@ -79,7 +97,7 @@ i = 0
 while True:
     new_parameters = {}
     for key in parameters.keys():
-        new_parameters[key] = parameters[key] * (random.random() + 99) / (random.random() + 99)
+        new_parameters[key] = parameters[key] * (random.random() + 999) / (random.random() + 999)
 
     new_error = calculate_error(new_parameters)
     if new_error < error:
