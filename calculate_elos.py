@@ -37,41 +37,6 @@ def add_team(instr, elo_ratings, home_field_elo_boosts, games_played, history):
 def predict_winchance(my_rating, enemy_rating):
     return 1 / (1 + 2**((enemy_rating - my_rating)/100))
 
-def result_winchance_integer_instances(my_score, enemy_score, scoring_instances):
-    my_ratio = my_score / (my_score + enemy_score)
-    enemy_ratio = 1 - my_ratio
-
-    if scoring_instances == 0:
-        return my_ratio
-
-    my_sum = 0
-    for i in range(int(round(scoring_instances/2 + 0.1, 0)), scoring_instances + 1):
-        # Calculate the chance I win exactly i of the scoring_instances
-        # the math.comb function computes the permutations using the stars and bars combinatorics method
-        chance = math.comb(scoring_instances, scoring_instances - i) * my_ratio**i * enemy_ratio**(scoring_instances - i)
-        if i == int(round(scoring_instances / 2 + 0.1, 0)) and scoring_instances % 2 == 0:
-            # Should a tied instance count be equal to my_ratio or 0.5?
-            # If 0.5, no differences between odd and even instances
-            # If my_ratio, no differences between even and odd instances
-            # Let's set it to be between 0.5 and my_ratio, so instances matter
-            chance *= (0.5 + my_ratio) / 2
-        my_sum += chance
-
-    return my_sum
-
-def result_winchance(my_score, enemy_score):
-    scoring_instances = (my_score + enemy_score) / POINTS_PER_SCORE
-
-    floor = math.floor(scoring_instances)
-    ceil = math.ceil(scoring_instances)
-
-    if floor == ceil:
-        return result_winchance_integer_instances(my_score, enemy_score, floor)
-    else:
-        floor_fraction = (ceil - scoring_instances) * result_winchance_integer_instances(my_score, enemy_score, floor)
-        ceil_fraction = (scoring_instances - floor) * result_winchance_integer_instances(my_score, enemy_score, ceil)
-        return floor_fraction + ceil_fraction
-
 def result_winchance_sigmoid(my_score, enemy_score):
     # 1 / (1 + e^(e*(b-a)/(b+a)))
     if my_score == enemy_score:
