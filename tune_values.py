@@ -7,14 +7,14 @@ import math
 def calculate_error(params):
     calculate_elos.MAX_ELO_CHANGE = params['MAX_ELO_CHANGE']
     calculate_elos.HOME_FIELD_MULTIPLIER = params['HOME_FIELD_MULTIPLIER']
-    calculate_elos.POINTS_PER_SCORE = params['POINTS_PER_SCORE']
+    #calculate_elos.POINTS_PER_SCORE = params['POINTS_PER_SCORE']
     calculate_elos.LEARNING_RATE_DECAY = params['LEARNING_RATE_DECAY']
     calculate_elos.SIGMOID_BASE1 = params['SIGMOID_BASE1']
     calculate_elos.SIGMOID_EXPONENT1 = params['SIGMOID_EXPONENT1']
-    calculate_elos.SIGMOID_BASE2 = params['SIGMOID_BASE2']
+    #calculate_elos.SIGMOID_BASE2 = params['SIGMOID_BASE2']
     calculate_elos.SIGMOID_EXPONENT2 = params['SIGMOID_EXPONENT2']
-    calculate_elos.SIGMOID_CONSTANT1 = params['SIGMOID_CONSTANT1']
-    calculate_elos.SIGMOID_CONSTANT2 = params['SIGMOID_CONSTANT2']
+    #calculate_elos.SIGMOID_CONSTANT1 = params['SIGMOID_CONSTANT1']
+    #calculate_elos.SIGMOID_CONSTANT2 = params['SIGMOID_CONSTANT2']
 
     instructions = calculate_elos.parse_input_file()
 
@@ -23,6 +23,7 @@ def calculate_error(params):
     elo_ratings = {}
     home_field_elo_boosts = {}
     history = {}
+    season = 0
     for instr in instructions:
         if instr.startswith('//'):
             continue
@@ -31,6 +32,10 @@ def calculate_error(params):
         elif instr.startswith('#newseason'):
             for key in games_played.keys():
                 games_played[key] = [0,0]
+            season += 1
+            if season == 2:
+                for key in history.keys():
+                    history[key] = []
         elif instr.startswith('#squash '):
             squash_amount = params['SQUASH_FRACTION']
             for team in elo_ratings.keys():
@@ -89,7 +94,7 @@ def calculate_error(params):
 
 
 # Parameters for [MAX_ELO_CHANGE, HOME_FIELD_ELO, SQUASH_FRACTION]
-parameters = {'MAX_ELO_CHANGE': random.random() * 15 + 50, 'HOME_FIELD_ELO': 20, 'HOME_FIELD_MULTIPLIER': 10, 'POINTS_PER_SCORE': random.random() * 7 + 2, 'SIGMOID_BASE1': 1, 'SIGMOID_EXPONENT1': 1, 'SIGMOID_BASE2': 1, 'SIGMOID_EXPONENT2': 1, 'SIGMOID_CONSTANT1': 1, 'SIGMOID_CONSTANT2': 1, 'LEARNING_RATE_INITIAL': 3.5, 'LEARNING_RATE_DECAY': 1, 'SQUASH_FRACTION': -0.1}
+parameters = {'MAX_ELO_CHANGE': 60, 'HOME_FIELD_ELO': -10, 'HOME_FIELD_MULTIPLIER': 25, 'SIGMOID_BASE1': 1, 'SIGMOID_EXPONENT1': 1, 'SIGMOID_EXPONENT2': 1, 'LEARNING_RATE_INITIAL': 1, 'LEARNING_RATE_DECAY': 1, 'SQUASH_FRACTION': 0.1}
 
 error = calculate_error(parameters)
 print('Iteration -1. Parameters: {}, Error: {}'.format(parameters, error))
