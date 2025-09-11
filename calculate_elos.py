@@ -46,7 +46,6 @@ def result_winchance_sigmoid(my_score, enemy_score):
     elif my_score < enemy_score:
         return 1.0 - result_winchance_sigmoid(enemy_score, my_score)
 
-    #return max(0.5, 1 / (1 + (SIGMOID_BASE1*my_score**SIGMOID_EXPONENT1 + SIGMOID_CONSTANT1)**((enemy_score - my_score)/(enemy_score + my_score))))
     return 1 / (1 + (my_score/enemy_score)**(SIGMOID_BASE1*-1*my_score**SIGMOID_EXPONENT1/(enemy_score**SIGMOID_EXPONENT2)))
 
 def elo_change(games_played, winchance_diff, learning_rate):

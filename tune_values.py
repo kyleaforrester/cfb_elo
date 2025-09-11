@@ -99,16 +99,25 @@ parameters = {'MAX_ELO_CHANGE': 60, 'HOME_FIELD_ELO': -10, 'HOME_FIELD_MULTIPLIE
 error = calculate_error(parameters)
 print('Iteration -1. Parameters: {}, Error: {}'.format(parameters, error))
 i = 0
+base = 99
+improvements = 0
 while True:
     new_parameters = {}
     for key in parameters.keys():
-        new_parameters[key] = parameters[key] * (random.random() + 999) / (random.random() + 999)
+        new_parameters[key] = parameters[key] * (random.random() + base) / (random.random() + base)
 
     new_error = calculate_error(new_parameters)
     if new_error < error:
         print('Iteration {}. New parameters: {}, new error: {}'.format(i, new_parameters, new_error))
         parameters = new_parameters
         error = new_error
-    if i % 1000 == 0:
-        print('Iteration {} concluded.'.format(i))
+        improvements += 1
+
+    if i > 0 and i % 1000 == 0:
+        if improvements == 0:
+            base *= 2
+        else:
+            base *= 20 / improvements
+        print('Iteration {} concluded. New base: {}'.format(i, base))
+        improvements = 0
     i += 1

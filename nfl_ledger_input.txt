@@ -1194,3 +1194,19 @@ Eagles,V,40,Chiefs,V,22
 #squash 0.1858
 #newseason
 #setrate 0.3741
+Vikings,V,27,Bears,H,24
+Cardinals,V,20,Saints,H,13
+Panthers,V,10,Jaguars,H,26
+Bengals,V,17,Browns,H,16
+Raiders,V,20,Patriots,H,13
+Dolphins,V,8,Colts,H,33
+Giants,V,6,Commanders,H,21
+Steelers,V,34,Jets,H,32
+Buccaneers,V,23,Falcons,H,20
+49ers,V,17,Seahawks,H,13
+Titans,V,12,Broncos,H,20
+Lions,V,13,Packers,H,27
+Texans,V,9,Rams,H,14
+Ravens,V,40,Bills,H,41
+Chiefs,V,21,Chargers,V,27
+Cowboys,V,20,Eagles,H,24
