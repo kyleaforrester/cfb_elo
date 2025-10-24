@@ -15,6 +15,10 @@ def format_website():
     for match in re.finditer(pattern, text):
         visit_team, visit_score, home_team, home_score = match.groups()
 
+        # Remove false positive hits
+        if visit_team in ('Featured Sections', 'Live Video', 'Shop'):
+            continue
+
         # Remove leading AP rankings attached to team names
         if visit_team[0].isdigit():
             visit_team = ' '.join(visit_team.split(' ')[1:])

@@ -31,4 +31,4 @@ The system has several parameters/variables that are used to calculate the Elo r
     5) Learning Rate: See 'Learning rate adjustment' paragraph above.  This is a multiplicative amount that is applied to the Max Elo Change for the first game of the season; its value will decay over time as the season progresses. A new season resets the rate.
     6) Set Rate Decay: The amount that the learning rate will decay for each game played thoughout the season.
     7) New Season Squash: The amount to squash or expand all teams from the mean when a new season occurs, due to off-field changes to every team that the system is naive to.
-All the above 7 parameters that make up the system are tuned to optimal values based on historical CFB and NFL game scores dating back to the 2021 season (post-Covid).  The values, found in each league's ledger files, have been optimized to reduce the error of the system.
+All the above 7 parameters that make up the system are tuned to optimal values based on historical CFB and NFL game scores dating back to the 2017 season.  The values, found in each league's ledger files, have been optimized to reduce the error of the system.
