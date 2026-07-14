@@ -7,8 +7,11 @@ import math
 def calculate_error(params):
     calculate_elos.MAX_ELO_CHANGE = params['MAX_ELO_CHANGE']
     calculate_elos.HOME_FIELD_MULTIPLIER = params['HOME_FIELD_MULTIPLIER']
-    calculate_elos.POINTS_PER_SCORE = params['POINTS_PER_SCORE']
     calculate_elos.LEARNING_RATE_DECAY = params['LEARNING_RATE_DECAY']
+    calculate_elos.VAR_A = params['VAR_A']
+    calculate_elos.VAR_B = params['VAR_B']
+    calculate_elos.VAR_C = params['VAR_C']
+    calculate_elos.VAR_D = params['VAR_D']
 
     instructions = calculate_elos.parse_input_file()
 
@@ -45,7 +48,13 @@ def calculate_error(params):
             continue
         elif instr.startswith('#homefieldmultiplier '):
             continue
-        elif instr.startswith('#pointsperscore '):
+        elif instr.startswith('#var_a '):
+            continue
+        elif instr.startswith('#var_b '):
+            continue
+        elif instr.startswith('#var_c '):
+            continue
+        elif instr.startswith('#var_d '):
             continue
         elif instr.startswith('#setrate '):
             learning_rate = params['LEARNING_RATE_INITIAL']
@@ -76,9 +85,9 @@ def calculate_error(params):
 
 
 # Parameters for [MAX_ELO_CHANGE, HOME_FIELD_ELO, SQUASH_FRACTION]
-parameters = {'MAX_ELO_CHANGE': 50, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 5, 'POINTS_PER_SCORE': 3, 'LEARNING_RATE_INITIAL': 0.5, 'LEARNING_RATE_DECAY': 0.75, 'SQUASH_FRACTION': 0.1}
+parameters = {'MAX_ELO_CHANGE': 50, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 5, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'LEARNING_RATE_INITIAL': 0.5, 'LEARNING_RATE_DECAY': 0.75, 'SQUASH_FRACTION': 0.1}
 
-parameters = {'MAX_ELO_CHANGE': 50, 'HOME_FIELD_ELO': 35, 'HOME_FIELD_MULTIPLIER': 5, 'POINTS_PER_SCORE': 7, 'LEARNING_RATE_INITIAL': 5, 'LEARNING_RATE_DECAY': 0.75, 'SQUASH_FRACTION': -0.1}
+#parameters = {'MAX_ELO_CHANGE': 50, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 5, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'LEARNING_RATE_INITIAL': 5, 'LEARNING_RATE_DECAY': 0.75, 'SQUASH_FRACTION': -0.1}
 
 bases = {}
 improvements = {}
@@ -91,15 +100,16 @@ print('Iteration -1. Parameters: {}, Error: {}'.format(parameters, error))
 i = 0
 while True:
     new_parameters = {}
-    modified_parameter = ''
-    for enum_key in enumerate(parameters.keys()):
-        if i % len(parameters.keys()) == enum_key[0]:
-            new_parameters[enum_key[1]] = parameters[enum_key[1]] * (random.random() + bases[enum_key[1]]) / (random.random() + bases[enum_key[1]])
-            modified_parameter = enum_key[1]
-            if abs(new_parameters[enum_key[1]]) < 0.0000000001 and random.random() < 0.1:
-                new_parameters[enum_key[1]] *= -1
+    keys = list(parameters.keys())
+    weights = [1/bases[k] for k in keys]
+    modified_parameter = random.choices(keys, weights=weights)[0]
+    for key in keys:
+        if key == modified_parameter:
+            new_parameters[key] = parameters[key] * (random.random() + bases[key]) / (random.random() + bases[key])
+            if abs(new_parameters[key]) < 0.0000000001 and random.random() < 0.1:
+                new_parameters[key] *= -1
         else:
-            new_parameters[enum_key[1]] = parameters[enum_key[1]]
+            new_parameters[key] = parameters[key]
 
     new_error = calculate_error(new_parameters)
     if new_error < error:
@@ -112,10 +122,10 @@ while True:
 
     if i > 0 and i % 1000 == 0:
         for key in parameters.keys():
-            if improvements[key][0] == 0:
+            if improvements[key][0] == 0 and improvements[key][1] < 4:
+                pass
+            elif improvements[key][0] == 0 and improvements[key][1] >= 4:
                 bases[key] *= 2
-            elif improvements[key][1] == 0:
-                bases[key] /= 2
             else:
                 adjustment = 0.25 / (improvements[key][0] / (improvements[key][0] + improvements[key][1]))
                 bases[key] *= min(max(0.5, adjustment), 2.0)

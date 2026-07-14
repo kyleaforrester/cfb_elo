@@ -7,8 +7,11 @@ import generate_html
 HOME_FIELD_ELO = 50
 HOME_FIELD_MULTIPLIER = 5
 MAX_ELO_CHANGE = 150
-POINTS_PER_SCORE = 17 / 3
 LEARNING_RATE_DECAY = 0.5
+VAR_A = 1
+VAR_B = 1
+VAR_C = 1
+VAR_D = 1
 
 def parse_input_file():
     if len(sys.argv) < 2:
@@ -73,6 +76,19 @@ def result_winchance(my_score, enemy_score):
         ceil_fraction = (scoring_instances - floor) * result_winchance_integer_instances(my_score, enemy_score, ceil)
         return floor_fraction + ceil_fraction
 
+def result_winchance_sigmoid(my_score, enemy_score):
+    if my_score == enemy_score:
+        return 0.5
+    elif enemy_score == 0:
+        return 1.0
+    elif my_score < enemy_score:
+        return 1.0 - result_winchance_sigmoid(enemy_score, my_score)
+
+    numerator = (my_score - enemy_score)**VAR_A + 10**VAR_B
+    denominator = (my_score + enemy_score)**VAR_C + 10**VAR_D
+
+    return 1 / (1 + 2**(-numerator/denominator))
+
 def elo_change(games_played, winchance_diff, learning_rate):
     new_rate = (learning_rate - 1) * (LEARNING_RATE_DECAY)**games_played + 1
 
@@ -92,7 +108,7 @@ def calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, games_playe
             games_played[a_name][1] += 1
         if b_name in games_played:
             games_played[b_name][1] += 1
-        print('Skipping game {} vs {}'.format(a_name, b_name), file=sys.stderr)
+        #print('Skipping game {} vs {}'.format(a_name, b_name), file=sys.stderr)
         return
 
     a_home_field = 0
@@ -105,7 +121,7 @@ def calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, games_playe
     a_expected_winchance = predict_winchance(elo_ratings[a_name][-1] + a_home_field, elo_ratings[b_name][-1] + b_home_field)
     b_expected_winchance = 1 - a_expected_winchance
 
-    a_result_winchance = result_winchance(a_score, b_score)
+    a_result_winchance = result_winchance_sigmoid(a_score, b_score)
     b_result_winchance = 1 - a_result_winchance
 
     a_elo_change = elo_change(games_played[a_name][0], a_result_winchance - a_expected_winchance, learning_rate)
@@ -224,9 +240,18 @@ def calculate_elos():
         elif instr.startswith('#homefieldmultiplier '):
             global HOME_FIELD_MULTIPLIER
             HOME_FIELD_MULTIPLIER = float(instr.split('#homefieldmultiplier ')[1])
-        elif instr.startswith('#pointsperscore '):
-            global POINTS_PER_SCORE
-            POINTS_PER_SCORE = float(instr.split('#pointsperscore ')[1])
+        elif instr.startswith('#var_a '):
+            global VAR_A
+            VAR_A = float(instr.split('#var_a ')[1])
+        elif instr.startswith('#var_b '):
+            global VAR_B
+            VAR_B = float(instr.split('#var_b ')[1])
+        elif instr.startswith('#var_c '):
+            global VAR_C
+            VAR_C = float(instr.split('#var_c ')[1])
+        elif instr.startswith('#var_d '):
+            global VAR_D
+            VAR_D = float(instr.split('#var_d ')[1])
         elif instr.startswith('#setrate '):
             learning_rate = float(instr.split('#setrate ')[1])
         elif instr.startswith('#setratedecay '):
