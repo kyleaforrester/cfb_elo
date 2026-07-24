@@ -8,6 +8,8 @@ def calculate_error(params):
     calculate_elos.MAX_ELO_CHANGE = params['MAX_ELO_CHANGE']
     calculate_elos.HOME_FIELD_MULTIPLIER = params['HOME_FIELD_MULTIPLIER']
     calculate_elos.LEARNING_RATE_DECAY = params['LEARNING_RATE_DECAY']
+    calculate_elos.UNCERTAINTY_INCREASE = params['UNCERTAINTY_INCREASE']
+    calculate_elos.UNCERTAINTY_ERROR_SENSITIVITY= params['UNCERTAINTY_ERROR_SENSITIVITY']
     calculate_elos.VAR_A = params['VAR_A']
     calculate_elos.VAR_B = params['VAR_B']
     calculate_elos.VAR_C = params['VAR_C']
@@ -15,8 +17,8 @@ def calculate_error(params):
 
     instructions = calculate_elos.parse_input_file()
 
-    learning_rate = 1
-    games_played = {}
+    uncertainty_multiplier = {}
+    fake_games_played = {}
     elo_ratings = {}
     home_field_elo_boosts = {}
     history = {}
@@ -27,8 +29,6 @@ def calculate_error(params):
         elif len(instr) == 0:
             continue
         elif instr.startswith('#newseason'):
-            for key in games_played.keys():
-                games_played[key] = [0,0]
             season += 1
             if season == 2:
                 for key in history.keys():
@@ -57,18 +57,23 @@ def calculate_error(params):
         elif instr.startswith('#var_d '):
             continue
         elif instr.startswith('#setrate '):
-            learning_rate = params['LEARNING_RATE_INITIAL']
+            for team in uncertainty_multiplier.keys():
+                uncertainty_multiplier[team] = params['LEARNING_RATE_INITIAL']
         elif instr.startswith('#setratedecay '):
             continue
+        elif instr.startswith('#uncertaintyincrease '):
+            continue
+        elif instr.startswith('#uncertaintyerrorsensitivity '):
+            continue
         elif instr.startswith('#add '):
-            calculate_elos.add_team(instr, elo_ratings, home_field_elo_boosts, games_played, history)
+            calculate_elos.add_team(instr, elo_ratings, home_field_elo_boosts, uncertainty_multiplier, fake_games_played, history)
         elif instr.startswith('#name '):
             continue
         elif instr.startswith('#end'):
             break
         elif len(instr.split(',')) == 6:
             # Calculate elo changes
-            calculate_elos.calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, games_played, learning_rate, history)
+            calculate_elos.calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, uncertainty_multiplier, fake_games_played, history)
         else:
             print('Invalid command: {}'.format(instr))
             continue
@@ -85,14 +90,14 @@ def calculate_error(params):
 
 
 # Parameters for [MAX_ELO_CHANGE, HOME_FIELD_ELO, SQUASH_FRACTION]
-parameters = {'MAX_ELO_CHANGE': 50, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 5, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'LEARNING_RATE_INITIAL': 0.5, 'LEARNING_RATE_DECAY': 0.75, 'SQUASH_FRACTION': 0.1}
+parameters = {'MAX_ELO_CHANGE': 15, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 2, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'VAR_E': 1, 'LEARNING_RATE_INITIAL': 2, 'LEARNING_RATE_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 1, 'UNCERTAINTY_ERROR_SENSITIVITY': 1, 'SQUASH_FRACTION': 0.1}
 
-#parameters = {'MAX_ELO_CHANGE': 50, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 5, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'LEARNING_RATE_INITIAL': 5, 'LEARNING_RATE_DECAY': 0.75, 'SQUASH_FRACTION': -0.1}
+parameters = {'MAX_ELO_CHANGE': 30, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 5, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'LEARNING_RATE_INITIAL': 5, 'LEARNING_RATE_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 5, 'UNCERTAINTY_ERROR_SENSITIVITY': 2, 'SQUASH_FRACTION': -0.1}
 
 bases = {}
 improvements = {}
 for k in parameters.keys():
-    bases[k] = 99
+    bases[k] = 9
     improvements[k] = [0, 0]
 
 error = calculate_error(parameters)

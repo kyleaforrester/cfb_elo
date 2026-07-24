@@ -125,6 +125,7 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present, home_
                                 <th>Win Chance</th>
                                 <th>Score</th>
                                 <th>Result</th>
+                                <th>Uncertainty</th>
                                 <th>Elo Change</th>
                             </tr>
                         </thead>
@@ -137,6 +138,7 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present, home_
             win_chance = round(game[5], 3)
             score = game[6]
             result = round(game[7], 3)
+            uncertainty = round(game[9], 1)
             elo_change = round(game[8], 1)
 
             teams_html += '''
@@ -149,7 +151,8 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present, home_
                                 <td>{}</td>
                                 <td>{}</td>
                                 <td>{}</td>
-                            </tr>'''.format(elo, opponent, opponent_elo, home_field, win_chance, score, result, elo_change)
+                                <td>{}</td>
+                            </tr>'''.format(elo, opponent, opponent_elo, home_field, win_chance, score, result, uncertainty, elo_change)
 
         teams_html += '''
                         </tbody>

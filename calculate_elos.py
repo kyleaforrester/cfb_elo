@@ -8,6 +8,8 @@ HOME_FIELD_ELO = 50
 HOME_FIELD_MULTIPLIER = 5
 MAX_ELO_CHANGE = 150
 LEARNING_RATE_DECAY = 0.5
+UNCERTAINTY_INCREASE = 1
+UNCERTAINTY_ERROR_SENSITIVITY = 1
 VAR_A = 1
 VAR_B = 1
 VAR_C = 1
@@ -21,14 +23,14 @@ def parse_input_file():
 
     return [l.strip() for l in open(sys.argv[1]).readlines() if len(l.strip()) > 0]
 
-def add_team(instr, elo_ratings, home_field_elo_boosts, games_played, history):
+def add_team(instr, elo_ratings, home_field_elo_boosts, uncertainty_multiplier, fake_games_played, history):
     team_elo = instr.split('#add ')[1].split(',')
     team = team_elo[0]
     elo = team_elo[1]
     elo_ratings[team] = [int(elo)]
     home_field_elo_boosts[team] = HOME_FIELD_ELO
-    # games_played is a tuple of [fbs_games, fcs_games]
-    games_played[team] = [0,0]
+    uncertainty_multiplier[team] = 1
+    fake_games_played[team] = 0
     history[team] = []
 
 def predict_winchance(my_rating, enemy_rating):
@@ -89,12 +91,7 @@ def result_winchance_sigmoid(my_score, enemy_score):
 
     return 1 / (1 + 2**(-numerator/denominator))
 
-def elo_change(games_played, winchance_diff, learning_rate):
-    new_rate = (learning_rate - 1) * (LEARNING_RATE_DECAY)**games_played + 1
-
-    return winchance_diff * MAX_ELO_CHANGE * new_rate
-
-def calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, games_played, learning_rate, history):
+def calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, uncertainty_multiplier, fake_games_played, history):
     split_string = instr.split(',')
     a_name = split_string[0]
     a_home = split_string[1] == 'H'
@@ -104,10 +101,10 @@ def calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, games_playe
     b_score = int(split_string[5])
 
     if a_name not in elo_ratings or b_name not in elo_ratings:
-        if a_name in games_played:
-            games_played[a_name][1] += 1
-        if b_name in games_played:
-            games_played[b_name][1] += 1
+        if a_name not in elo_ratings:
+            fake_games_played[b_name] += 1
+        if b_name not in elo_ratings:
+            fake_games_played[a_name] += 1
         #print('Skipping game {} vs {}'.format(a_name, b_name), file=sys.stderr)
         return
 
@@ -124,54 +121,61 @@ def calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, games_playe
     a_result_winchance = result_winchance_sigmoid(a_score, b_score)
     b_result_winchance = 1 - a_result_winchance
 
-    a_elo_change = elo_change(games_played[a_name][0], a_result_winchance - a_expected_winchance, learning_rate)
-    b_elo_change = elo_change(games_played[b_name][0], b_result_winchance - b_expected_winchance, learning_rate)
+    a_error = a_result_winchance - a_expected_winchance
+    b_error = b_result_winchance - b_expected_winchance
+
+    old_a_uncertainty_multiplier = uncertainty_multiplier[a_name]
+    old_b_uncertainty_multiplier = uncertainty_multiplier[b_name]
+
+    a_elo_change = old_a_uncertainty_multiplier * a_error * MAX_ELO_CHANGE
+    b_elo_change = old_b_uncertainty_multiplier * b_error * MAX_ELO_CHANGE
 
     elo_ratings[a_name].append(elo_ratings[a_name][-1] + a_elo_change)
     elo_ratings[b_name].append(elo_ratings[b_name][-1] + b_elo_change)
 
     if a_home:
-        new_val = home_field_elo_boosts[a_name] + HOME_FIELD_MULTIPLIER * (a_result_winchance - a_expected_winchance)
+        new_val = home_field_elo_boosts[a_name] + HOME_FIELD_MULTIPLIER * (a_error)
         home_field_elo_boosts[a_name] = max(0, new_val)
     if b_home:
-        new_val = home_field_elo_boosts[b_name] + HOME_FIELD_MULTIPLIER * (b_result_winchance - b_expected_winchance)
+        new_val = home_field_elo_boosts[b_name] + HOME_FIELD_MULTIPLIER * (b_error)
         home_field_elo_boosts[b_name] = max(0, new_val)
 
-    games_played[a_name][0] += 1
-    games_played[b_name][0] += 1
+    global UNCERTAINTY_INCREASE
+    uncertainty_multiplier[a_name] = (old_a_uncertainty_multiplier - 1) * LEARNING_RATE_DECAY + (UNCERTAINTY_INCREASE * abs(a_error)**UNCERTAINTY_ERROR_SENSITIVITY) + 1
+    uncertainty_multiplier[b_name] = (old_b_uncertainty_multiplier - 1) * LEARNING_RATE_DECAY + (UNCERTAINTY_INCREASE * abs(b_error)**UNCERTAINTY_ERROR_SENSITIVITY) + 1
 
-    history[a_name].append([a_home_field, elo_ratings[a_name][-2], b_name, b_home_field, elo_ratings[b_name][-2], a_expected_winchance, str(a_score) + ' - ' + str(b_score), a_result_winchance, a_elo_change])
-    history[b_name].append([b_home_field, elo_ratings[b_name][-2], a_name, a_home_field, elo_ratings[a_name][-2], b_expected_winchance, str(b_score) + ' - ' + str(a_score), b_result_winchance, b_elo_change])
+    history[a_name].append([a_home_field, elo_ratings[a_name][-2], b_name, b_home_field, elo_ratings[b_name][-2], a_expected_winchance, str(a_score) + ' - ' + str(b_score), a_result_winchance, a_elo_change, old_a_uncertainty_multiplier])
+    history[b_name].append([b_home_field, elo_ratings[b_name][-2], a_name, a_home_field, elo_ratings[a_name][-2], b_expected_winchance, str(b_score) + ' - ' + str(a_score), b_result_winchance, b_elo_change, old_b_uncertainty_multiplier])
 
-def calculate_expected_win_percentage(games_played, my_elo, opponent_elos):
-    # FCS games are considered an automatic win
-    avg_wins_sum = games_played[1]
+def calculate_expected_win_percentage(fake_games_played, my_elo, opponent_elos):
+    # Fake games are considered an automatic win
+    avg_wins_sum = fake_games_played
     for o_e in opponent_elos:
         # Homes and aways already built into opponent_elos
         avg_wins_sum += predict_winchance(my_elo, o_e)
-    return avg_wins_sum / sum(games_played)
+    return avg_wins_sum / (fake_games_played + len(opponent_elos))
 
-def calculate_win_50_elo(games_played, opponent_elos):
+def calculate_win_50_elo(fake_games_played, opponent_elos):
     # Returns the hypothetical elo required to win exactly 50% of games
     # Calculate a binary search in the elo space to find the win50 elo
     # Stop once you are within 0.001 of the ideal expected_win_percentage
     min_elo = min(opponent_elos) - 2000
     max_elo = max(opponent_elos)
     guess_elo = (min_elo + max_elo) / 2
-    expected_win_percentage = calculate_expected_win_percentage(games_played, guess_elo, opponent_elos)
+    expected_win_percentage = calculate_expected_win_percentage(fake_games_played, guess_elo, opponent_elos)
     while expected_win_percentage < 0.49999 or expected_win_percentage > 0.50001:
         if expected_win_percentage < 0.49999:
             min_elo = guess_elo
         elif expected_win_percentage > 0.50001:
             max_elo = guess_elo
         guess_elo = (min_elo + max_elo) / 2
-        expected_win_percentage = calculate_expected_win_percentage(games_played, guess_elo, opponent_elos)
+        expected_win_percentage = calculate_expected_win_percentage(fake_games_played, guess_elo, opponent_elos)
 
     # Expected_wins is now within 0.01 of the mathematical value
     return guess_elo
         
 
-def calculate_win_50_elo_past(games_played, history):
+def calculate_win_50_elo_past(fake_games_played, history):
     win_50 = {}
     for team in history.keys():
         opponent_elos = []
@@ -181,12 +185,12 @@ def calculate_win_50_elo_past(games_played, history):
             enemy_elo += h[3] - h[0]
             opponent_elos.append(enemy_elo)
         if len(opponent_elos) > 0:
-            win_50[team] = calculate_win_50_elo(games_played[team], opponent_elos)
+            win_50[team] = calculate_win_50_elo(fake_games_played[team], opponent_elos)
         else:
             win_50[team] = 0
     return win_50
 
-def calculate_win_50_elo_present(games_played, history, elo_ratings, home_field_elo_boosts):
+def calculate_win_50_elo_present(fake_games_played, history, elo_ratings, home_field_elo_boosts):
     win_50 = {}
     for team in history.keys():
         opponent_elos = []
@@ -198,7 +202,7 @@ def calculate_win_50_elo_present(games_played, history, elo_ratings, home_field_
                 enemy_elo += home_field_elo_boosts[h[2]]
             opponent_elos.append(enemy_elo)
         if len(opponent_elos) > 0:
-            win_50[team] = calculate_win_50_elo(games_played[team], opponent_elos)
+            win_50[team] = calculate_win_50_elo(fake_games_played[team], opponent_elos)
         else:
             win_50[team] = 0
     return win_50
@@ -206,8 +210,8 @@ def calculate_win_50_elo_present(games_played, history, elo_ratings, home_field_
 def calculate_elos():
     instructions = parse_input_file()
 
-    learning_rate = 1
-    games_played = {}
+    uncertainty_multiplier = {}
+    fake_games_played = {}
     elo_ratings = {}
     home_field_elo_boosts = {}
     history = {}
@@ -220,8 +224,7 @@ def calculate_elos():
         elif instr.startswith('#newseason'):
             for key in history.keys():
                 history[key] = []
-            for key in games_played.keys():
-                games_played[key] = [0,0]
+                fake_games_played[key] = 0
         elif instr.startswith('#squash '):
             squash_amount = float(instr.split('#squash ')[1])
             for team in elo_ratings.keys():
@@ -253,25 +256,32 @@ def calculate_elos():
             global VAR_D
             VAR_D = float(instr.split('#var_d ')[1])
         elif instr.startswith('#setrate '):
-            learning_rate = float(instr.split('#setrate ')[1])
+            for team in uncertainty_multiplier.keys():
+                uncertainty_multiplier[team] = float(instr.split('#setrate ')[1])
         elif instr.startswith('#setratedecay '):
             global LEARNING_RATE_DECAY
             LEARNING_RATE_DECAY = float(instr.split('#setratedecay ')[1])
+        elif instr.startswith('#uncertaintyincrease '):
+            global UNCERTAINTY_INCREASE
+            UNCERTAINTY_INCREASE = float(instr.split('#uncertaintyincrease ')[1])
+        elif instr.startswith('#uncertaintyerrorsensitivity '):
+            global UNCERTAINTY_ERROR_SENSITIVITY
+            UNCERTAINTY_ERROR_SENSITIVITY = float(instr.split('#uncertaintyerrorsensitivity ')[1])
         elif instr.startswith('#add '):
-            add_team(instr, elo_ratings, home_field_elo_boosts, games_played, history)
+            add_team(instr, elo_ratings, home_field_elo_boosts, uncertainty_multiplier, fake_games_played, history)
         elif instr.startswith('#name '):
             name = instr.split('#name ')[1]
         elif instr.startswith('#end'):
             break
         elif len(instr.split(',')) == 6:
             # Calculate elo changes
-            calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, games_played, learning_rate, history)
+            calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, uncertainty_multiplier, fake_games_played, history)
         else:
             print('Invalid command: {}'.format(instr))
             continue
 
-    win_50_elo_past = calculate_win_50_elo_past(games_played, history)
-    win_50_elo_present = calculate_win_50_elo_present(games_played, history, elo_ratings, home_field_elo_boosts)
+    win_50_elo_past = calculate_win_50_elo_past(fake_games_played, history)
+    win_50_elo_present = calculate_win_50_elo_present(fake_games_played, history, elo_ratings, home_field_elo_boosts)
 
     return [elo_ratings, history, win_50_elo_past, win_50_elo_present, home_field_elo_boosts, name]
 
