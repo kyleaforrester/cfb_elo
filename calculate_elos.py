@@ -14,6 +14,8 @@ VAR_A = 1
 VAR_B = 1
 VAR_C = 1
 VAR_D = 1
+VAR_E = 1
+VAR_F = 1
 
 def parse_input_file():
     if len(sys.argv) < 2:
@@ -86,8 +88,10 @@ def result_winchance_sigmoid(my_score, enemy_score):
     elif my_score < enemy_score:
         return 1.0 - result_winchance_sigmoid(enemy_score, my_score)
 
-    numerator = (my_score - enemy_score)**VAR_A + 10**VAR_B
-    denominator = (my_score + enemy_score)**VAR_C + 10**VAR_D
+    diff = my_score - enemy_score
+    total = my_score + enemy_score
+    numerator = VAR_A*diff**2 + VAR_B*diff + VAR_C
+    denominator = VAR_D*total**2 + VAR_E*total + VAR_F
 
     return 1 / (1 + 2**(-numerator/denominator))
 
@@ -255,6 +259,12 @@ def calculate_elos():
         elif instr.startswith('#var_d '):
             global VAR_D
             VAR_D = float(instr.split('#var_d ')[1])
+        elif instr.startswith('#var_e '):
+            global VAR_E
+            VAR_E = float(instr.split('#var_e ')[1])
+        elif instr.startswith('#var_f '):
+            global VAR_F
+            VAR_F = float(instr.split('#var_f ')[1])
         elif instr.startswith('#setrate '):
             for team in uncertainty_multiplier.keys():
                 uncertainty_multiplier[team] = float(instr.split('#setrate ')[1])

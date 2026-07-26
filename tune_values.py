@@ -14,6 +14,8 @@ def calculate_error(params):
     calculate_elos.VAR_B = params['VAR_B']
     calculate_elos.VAR_C = params['VAR_C']
     calculate_elos.VAR_D = params['VAR_D']
+    calculate_elos.VAR_E = params['VAR_E']
+    calculate_elos.VAR_F = params['VAR_F']
 
     instructions = calculate_elos.parse_input_file()
 
@@ -56,6 +58,10 @@ def calculate_error(params):
             continue
         elif instr.startswith('#var_d '):
             continue
+        elif instr.startswith('#var_e '):
+            continue
+        elif instr.startswith('#var_f '):
+            continue
         elif instr.startswith('#setrate '):
             for team in uncertainty_multiplier.keys():
                 uncertainty_multiplier[team] = params['LEARNING_RATE_INITIAL']
@@ -90,10 +96,9 @@ def calculate_error(params):
 
 
 # Parameters for [MAX_ELO_CHANGE, HOME_FIELD_ELO, SQUASH_FRACTION]
-parameters = {'MAX_ELO_CHANGE': 15, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 2, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'VAR_E': 1, 'LEARNING_RATE_INITIAL': 2, 'LEARNING_RATE_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 1, 'UNCERTAINTY_ERROR_SENSITIVITY': 1, 'SQUASH_FRACTION': 0.1}
+parameters = {'MAX_ELO_CHANGE': 15, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 2, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'VAR_E': 1, 'VAR_F': 1, 'LEARNING_RATE_INITIAL': 2, 'LEARNING_RATE_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 1, 'UNCERTAINTY_ERROR_SENSITIVITY': 1, 'SQUASH_FRACTION': 0.1}
 
-parameters = {'MAX_ELO_CHANGE': 30, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 5, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'LEARNING_RATE_INITIAL': 5, 'LEARNING_RATE_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 5, 'UNCERTAINTY_ERROR_SENSITIVITY': 2, 'SQUASH_FRACTION': -0.1}
-
+parameters = {'MAX_ELO_CHANGE': 30, 'HOME_FIELD_ELO': 40, 'HOME_FIELD_MULTIPLIER': 5, 'VAR_A': 2, 'VAR_B': 60, 'VAR_C': 40, 'VAR_D': 0.05, 'VAR_E': 5, 'VAR_F': 500, 'LEARNING_RATE_INITIAL': 7, 'LEARNING_RATE_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 10, 'UNCERTAINTY_ERROR_SENSITIVITY': 2, 'SQUASH_FRACTION': -0.1}
 bases = {}
 improvements = {}
 for k in parameters.keys():
