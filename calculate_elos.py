@@ -63,8 +63,6 @@ def result_winchance_integer_instances(my_score, enemy_score, scoring_instances)
 def result_winchance(my_score, enemy_score):
     if my_score == enemy_score:
         return 0.5
-    elif enemy_score == 0:
-        return 1.0
     elif my_score < enemy_score:
         return 1.0 - result_winchance(enemy_score, my_score)
 

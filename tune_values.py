@@ -84,29 +84,42 @@ def calculate_error(params):
             print('Invalid command: {}'.format(instr))
             continue
 
-    error = 0
+    total_error = 0
+    total_squared_error = 0
+    total_cross_entropy = 0
+    total_correct = 0
+    games = 0
     for team in history.keys():
         for entry in history[team]:
             if entry[7] > 0.5:
-                error += (1.0 - entry[5])**2
+                total_cross_entropy += -math.log(entry[5])
+                error = (1.0 - entry[5])
+                if entry[5] > 0.5:
+                    total_correct += 1
             else:
-                error += entry[5]**2
+                total_cross_entropy += -math.log(1.0 - entry[5])
+                error = entry[5]
+                if entry[5] < 0.5:
+                    total_correct += 1
 
-    return error
+            total_error += error
+            games += 1
+
+    return total_cross_entropy, total_error / games, total_correct / games
 
 
 # Parameters for [MAX_ELO_CHANGE, HOME_FIELD_ELO, SQUASH_FRACTION]
 parameters = {'MAX_ELO_CHANGE': 15, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 2, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'VAR_E': 1, 'VAR_F': 1, 'LEARNING_RATE_INITIAL': 2, 'LEARNING_RATE_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 1, 'UNCERTAINTY_ERROR_SENSITIVITY': 1, 'SQUASH_FRACTION': 0.1}
 
-parameters = {'MAX_ELO_CHANGE': 30, 'HOME_FIELD_ELO': 40, 'HOME_FIELD_MULTIPLIER': 5, 'VAR_A': 2, 'VAR_B': 60, 'VAR_C': 40, 'VAR_D': 0.05, 'VAR_E': 5, 'VAR_F': 500, 'LEARNING_RATE_INITIAL': 7, 'LEARNING_RATE_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 10, 'UNCERTAINTY_ERROR_SENSITIVITY': 2, 'SQUASH_FRACTION': -0.1}
+parameters = {'MAX_ELO_CHANGE': 30, 'HOME_FIELD_ELO': 40, 'HOME_FIELD_MULTIPLIER': 5, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'VAR_E': 1, 'VAR_F': 1, 'LEARNING_RATE_INITIAL': 7, 'LEARNING_RATE_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 10, 'UNCERTAINTY_ERROR_SENSITIVITY': 2, 'SQUASH_FRACTION': -0.1}
 bases = {}
 improvements = {}
 for k in parameters.keys():
     bases[k] = 9
     improvements[k] = [0, 0]
 
-error = calculate_error(parameters)
-print('Iteration -1. Parameters: {}, Error: {}'.format(parameters, error))
+error, avg_error, pct_correct = calculate_error(parameters)
+print('Iteration -1. Parameters: {}, Total Cross Entropy Error: {}, Average Linear Error: {}, Percent Correct: {}'.format(parameters, error, avg_error, pct_correct))
 i = 0
 while True:
     new_parameters = {}
@@ -121,9 +134,9 @@ while True:
         else:
             new_parameters[key] = parameters[key]
 
-    new_error = calculate_error(new_parameters)
+    new_error, new_avg_error, new_pct_correct = calculate_error(new_parameters)
     if new_error < error:
-        print('Iteration {}. New parameters: {}, new error: {}'.format(i, new_parameters, new_error))
+        print('Iteration {}. New parameters: {}, new total cross entropy error: {}, new avg linear error: {}, new pct correct: {}'.format(i, new_parameters, new_error, new_avg_error, new_pct_correct))
         parameters = new_parameters
         error = new_error
         improvements[modified_parameter][0] += 1
