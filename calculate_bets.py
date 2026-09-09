@@ -24,6 +24,11 @@ class Bet:
 
         self.actual_winchance = calculate_elos.predict_winchance(self.winning_elo + self.home_field_adv, self.opponent_elo)
 
+        if self.actual_winchance >= 0.5:
+            self.actual_line = -100 * self.actual_winchance / (1 - self.actual_winchance)
+        else:
+            self.actual_line = (100 - 100*self.actual_winchance) / self.actual_winchance
+
         if self.line > 0:
             self.vegas_winchance = 100 / (self.line + 100)
             won = self.line * self.actual_winchance

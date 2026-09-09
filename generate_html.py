@@ -218,7 +218,8 @@ def generate_bets_html(bets, elo_ratings, name):
                 <th>Home Field Adv</th>
                 <th>Opponent</th>
                 <th>Opponent Elo</th>
-                <th>Line</th>
+                <th>Vegas Line</th>
+                <th>Actual Line</th>
                 <th>Vegas Winchance</th>
                 <th>Actual Winchance</th>
                 <th>Payout ($)</th>
@@ -237,6 +238,7 @@ def generate_bets_html(bets, elo_ratings, name):
         home_field_adv = round(bet.home_field_adv)
         winning_team_elo = round(elo_ratings[bet.winning_team][-1])
         opponent_elo = round(elo_ratings[bet.opponent_team][-1])
+        actual_line = round(bet.actual_line)
         vegas_winchance = round(bet.vegas_winchance, 3)
         actual_winchance = round(bet.actual_winchance, 3)
         payout = round(bet.payout, 3)
@@ -251,8 +253,9 @@ def generate_bets_html(bets, elo_ratings, name):
                 <td>{}</td>
                 <td>{}</td>
                 <td>{}</td>
+                <td>{}</td>
                 <td>{:.2f}</td>
-            </tr>'''.format(enum_bet[0] + 1, bet.winning_team, winning_team_elo, home_field_adv, bet.opponent_team, opponent_elo, bet.line, vegas_winchance, actual_winchance, payout)
+            </tr>'''.format(enum_bet[0] + 1, bet.winning_team, winning_team_elo, home_field_adv, bet.opponent_team, opponent_elo, bet.line, actual_line, vegas_winchance, actual_winchance, payout)
 
     html = html.replace('{{NAME}}', name)
     return html.replace('{{BETS_HTML}}', bets_html)
