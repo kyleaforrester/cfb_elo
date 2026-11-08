@@ -1,3 +1,5 @@
+import math
+
 def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present, home_field_elo_boosts, name):
     html = '''
 <!DOCTYPE html>
@@ -86,8 +88,15 @@ def generate_html(elo_ratings, history, win50_elo_past, win50_elo_present, home_
         elo_list = elo_ratings[team[1]]
         rating = round(elo_list[-1])
         home_field_adv = round(home_field_elo_boosts[team[1]])
-        my_team_win50_past = round(win50_elo_past[team[1]])
-        my_team_win50_present = round(win50_elo_present[team[1]])
+
+        if math.isinf(win50_elo_past[team[1]]):
+            my_team_win50_past = win50_elo_past[team[1]]
+        else:
+            my_team_win50_past = round(win50_elo_past[team[1]])
+        if math.isinf(win50_elo_present[team[1]]):
+            my_team_win50_present = win50_elo_present[team[1]]
+        else:
+            my_team_win50_present = round(win50_elo_present[team[1]])
 
         change_since_1 = None
         if len(elo_list) >= 2:

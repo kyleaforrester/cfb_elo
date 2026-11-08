@@ -45,13 +45,13 @@
 #var_d 0.026488
 #var_e -2.3857
 #var_f 117.37
-#setratedecay 0.88890
+#uncertaintydecay 0.88890
 #uncertaintyincrease 0.84303
 #uncertaintyerrorsensitivity 0.62504
 
 // 2017 Season
 #newseason
-#setrate 3.4540
+#setuncertainty 3.4540
 Saints,V,19,Vikings,H,29
 Chargers,V,21,Broncos,H,24
 Cardinals,V,23,Lions,H,35
@@ -323,7 +323,8 @@ Eagles,V,41,Patriots,V,33
 // 2018 Season
 #squash 0.33193
 #newseason
-#setrate 3.4540
+#clearhistory
+#setuncertainty 3.4540
 Jets,V,48,Lions,H,17
 Rams,V,33,Raiders,H,13
 Bills,V,3,Ravens,H,47
@@ -595,7 +596,7 @@ Patriots,V,13,Rams,V,3
 // 2019 Season
 #squash 0.33193
 #newseason
-#setrate 3.4540
+#setuncertainty 3.4540
 Texans,V,28,Saints,H,30
 Broncos,V,16,Raiders,H,24
 Falcons,V,12,Vikings,H,28
@@ -867,7 +868,7 @@ Packers,V,20,49ers,H,37
 // 2020 Season
 #squash 0.33193
 #newseason
-#setrate 3.4540
+#setuncertainty 3.4540
 Steelers,V,26,Giants,H,16
 Titans,V,16,Broncos,H,14
 Bears,V,27,Lions,H,23
@@ -1141,7 +1142,7 @@ Chiefs,V,9,Buccaneers,V,31
 // 2021 Season
 #squash 0.33193
 #newseason
-#setrate 3.4540
+#setuncertainty 3.4540
 Ravens,V,27,Raiders,H,33
 Cardinals,V,38,Titans,H,13
 Jaguars,V,21,Texans,H,37
@@ -1421,7 +1422,7 @@ Rams,H,23,Bengals,V,20
 // 2022 Season
 #squash 0.33193
 #newseason
-#setrate 3.4540
+#setuncertainty 3.4540
 Broncos,V,16,Seahawks,H,17
 Ravens,V,24,Jets,H,9
 Browns,V,26,Panthers,H,24
@@ -1710,7 +1711,7 @@ Chiefs,V,38,Eagles,V,35
 // 2023 Season
 #squash 0.33193
 #newseason
-#setrate 3.4540
+#setuncertainty 3.4540
 Bills,V,16,Jets,H,22
 Cardinals,V,16,Commanders,H,20
 Panthers,V,10,Falcons,H,24
@@ -2000,7 +2001,7 @@ Lions,V,31,49ers,H,34
 // 2024 Season
 #squash 0.33193
 #newseason
-#setrate 3.4540
+#setuncertainty 3.4540
 Jets,V,19,49ers,H,32
 Cardinals,V,28,Bills,H,34
 Panthers,V,10,Saints,H,47
@@ -2290,7 +2291,7 @@ Eagles,V,40,Chiefs,V,22
 // 2025 Season
 #squash 0.33193
 #newseason
-#setrate 3.4540
+#setuncertainty 3.4540
 Vikings,V,27,Bears,H,24
 Cardinals,V,20,Saints,H,13
 Panthers,V,10,Jaguars,H,26
@@ -2580,4 +2581,125 @@ Seahawks,V,29,Patriots,V,13
 // 2026 Season
 #squash 0.33193
 #newseason
-#setrate 3.4540
+#setuncertainty 3.4540
+Broncos,V,10,Chiefs,H,31
+Falcons,V,13,Steelers,H,20
+Ravens,V,41,Colts,H,23
+Bills,V,36,Texans,H,31
+Bears,V,59,Panthers,H,37
+Browns,V,10,Jaguars,H,34
+Saints,V,30,Lions,H,31
+Jets,V,23,Titans,H,10
+Buccaneers,V,27,Bengals,H,33
+Cardinals,V,26,Chargers,H,14
+Packers,V,22,Vikings,H,39
+Dolphins,V,13,Raiders,H,27
+Commanders,V,22,Eagles,H,24
+Cowboys,V,20,Giants,H,28
+49ers,V,27,Rams,V,7
+Patriots,V,10,Seahawks,H,13
+Giants,V,6,Rams,H,28
+Panthers,V,34,Falcons,H,3
+Bengals,V,20,Texans,H,6
+Browns,V,23,Buccaneers,H,19
+Packers,V,20,Jets,H,17
+Vikings,V,9,Bears,H,3
+Saints,V,24,Ravens,H,17
+Eagles,V,24,Titans,H,20
+Steelers,V,3,Patriots,H,20
+Jaguars,V,13,Broncos,H,20
+Raiders,V,26,Chargers,H,14
+Dolphins,V,13,49ers,H,35
+Seahawks,V,31,Cardinals,H,7
+Commanders,V,20,Cowboys,H,37
+Colts,V,30,Chiefs,H,33
+Lions,V,31,Bills,H,41
+Eagles,V,7,Bears,H,27
+Panthers,V,18,Browns,H,21
+Bengals,V,27,Steelers,H,30
+Texans,V,17,Colts,H,19
+Chiefs,V,24,Dolphins,H,10
+Chargers,V,16,Bills,H,24
+Patriots,V,6,Jaguars,H,35
+Jets,V,24,Lions,H,31
+Seahawks,V,31,Commanders,H,33
+Titans,V,7,Giants,H,12
+Cardinals,V,30,49ers,H,36
+Vikings,V,23,Buccaneers,H,16
+Ravens,V,34,Cowboys,V,31
+Raiders,V,35,Saints,H,27
+Rams,V,26,Broncos,H,30
+Falcons,V,35,Packers,H,14
+Falcons,V,45,Saints,H,24
+Colts,V,30,Commanders,V,13
+Cardinals,V,24,Giants,H,36
+Cowboys,V,34,Texans,H,30
+Packers,V,17,Buccaneers,H,14
+Jaguars,V,22,Bengals,H,17
+Rams,V,24,Eagles,H,20
+Patriots,V,29,Bills,H,26
+Jets,V,12,Bears,H,23
+Titans,V,18,Ravens,H,24
+Dolphins,V,10,Vikings,H,15
+Broncos,V,14,49ers,H,24
+Chiefs,V,30,Raiders,H,27
+Chargers,V,23,Seahawks,H,30
+Lions,V,26,Panthers,H,32
+Steelers,V,24,Browns,H,27
+Bills,V,37,Rams,H,34
+Eagles,V,17,Jaguars,H,19
+Bears,V,7,Packers,H,31
+Bengals,V,31,Dolphins,H,24
+Browns,V,12,Jets,H,17
+Texans,V,26,Titans,H,3
+Colts,V,22,Steelers,H,34
+Raiders,V,17,Patriots,H,45
+Vikings,V,23,Saints,H,13
+Giants,V,27,Commanders,H,27
+Broncos,V,23,Chargers,H,17
+Lions,V,45,Cardinals,H,21
+49ers,V,32,Seahawks,H,29
+Ravens,V,30,Falcons,H,23
+Buccaneers,V,24,Cowboys,H,16
+Commanders,V,17,49ers,H,23
+Texans,V,34,Jaguars,V,31
+Ravens,V,10,Browns,H,13
+Panthers,V,25,Eagles,H,14
+Bears,V,31,Falcons,H,23
+Saints,V,34,Giants,H,27
+Jets,V,19,Patriots,H,26
+Steelers,V,26,Buccaneers,H,19
+Titans,V,26,Colts,H,20
+Cardinals,V,18,Rams,H,16
+Bills,V,33,Raiders,H,30
+Chargers,V,6,Chiefs,H,22
+Cowboys,V,13,Packers,H,23
+Seahawks,V,14,Broncos,H,17
+Cowboys,V,38,Eagles,H,21
+Steelers,V,16,Saints,V,10
+Bengals,V,35,Ravens,H,13
+Browns,V,27,Titans,H,24
+Colts,V,10,Vikings,H,16
+Dolphins,V,28,Jets,H,25
+Giants,V,27,Texans,H,21
+49ers,V,20,Falcons,H,29
+Buccaneers,V,43,Panthers,H,13
+Broncos,V,30,Cardinals,H,16
+Packers,V,17,Lions,H,20
+Rams,V,35,Raiders,H,21
+Chiefs,V,3,Seahawks,H,20
+Patriots,V,24,Bears,H,30
+Bears,V,34,Seahawks,H,17
+Cardinals,V,33,Cowboys,H,30
+Falcons,V,0,Buccaneers,H,16
+Ravens,V,10,Bills,H,36
+Browns,V,6,Steelers,H,27
+Colts,V,7,Jaguars,H,42
+Raiders,V,38,Jets,H,33
+Vikings,V,15,Lions,H,19
+Titans,V,36,Bengals,H,43
+Chargers,V,9,Rams,H,24
+Chiefs,V,24,Broncos,H,28
+Patriots,V,24,Dolphins,H,19
+Eagles,V,10,Commanders,H,27
+Panthers,V,19,Packers,H,27

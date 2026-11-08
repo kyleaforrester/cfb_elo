@@ -7,7 +7,7 @@ import math
 def calculate_error(params):
     calculate_elos.MAX_ELO_CHANGE = params['MAX_ELO_CHANGE']
     calculate_elos.HOME_FIELD_MULTIPLIER = params['HOME_FIELD_MULTIPLIER']
-    calculate_elos.LEARNING_RATE_DECAY = params['LEARNING_RATE_DECAY']
+    calculate_elos.UNCERTAINTY_DECAY = params['UNCERTAINTY_DECAY']
     calculate_elos.UNCERTAINTY_INCREASE = params['UNCERTAINTY_INCREASE']
     calculate_elos.UNCERTAINTY_ERROR_SENSITIVITY= params['UNCERTAINTY_ERROR_SENSITIVITY']
     calculate_elos.VAR_A = params['VAR_A']
@@ -32,9 +32,9 @@ def calculate_error(params):
             continue
         elif instr.startswith('#newseason'):
             season += 1
-            if season == 2:
-                for key in history.keys():
-                    history[key] = []
+        elif instr.startswith('#clearhistory'):
+            for key in history.keys():
+                history[key] = []
         elif instr.startswith('#squash '):
             squash_amount = params['SQUASH_FRACTION']
             for team in elo_ratings.keys():
@@ -62,10 +62,10 @@ def calculate_error(params):
             continue
         elif instr.startswith('#var_f '):
             continue
-        elif instr.startswith('#setrate '):
+        elif instr.startswith('#setuncertainty '):
             for team in uncertainty_multiplier.keys():
-                uncertainty_multiplier[team] = params['LEARNING_RATE_INITIAL']
-        elif instr.startswith('#setratedecay '):
+                uncertainty_multiplier[team] = params['UNCERTAINTY_INITIAL']
+        elif instr.startswith('#uncertaintydecay '):
             continue
         elif instr.startswith('#uncertaintyincrease '):
             continue
@@ -109,9 +109,9 @@ def calculate_error(params):
 
 
 # Parameters for [MAX_ELO_CHANGE, HOME_FIELD_ELO, SQUASH_FRACTION]
-parameters = {'MAX_ELO_CHANGE': 15, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 2, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'VAR_E': 1, 'VAR_F': 1, 'LEARNING_RATE_INITIAL': 2, 'LEARNING_RATE_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 1, 'UNCERTAINTY_ERROR_SENSITIVITY': 1, 'SQUASH_FRACTION': 0.1}
+parameters = {'MAX_ELO_CHANGE': 15, 'HOME_FIELD_ELO': 30, 'HOME_FIELD_MULTIPLIER': 2, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'VAR_E': 1, 'VAR_F': 1, 'UNCERTAINTY_INITIAL': 2, 'UNCERTAINTY_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 1, 'UNCERTAINTY_ERROR_SENSITIVITY': 1, 'SQUASH_FRACTION': 0.1}
 
-parameters = {'MAX_ELO_CHANGE': 30, 'HOME_FIELD_ELO': 40, 'HOME_FIELD_MULTIPLIER': 5, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'VAR_E': 1, 'VAR_F': 1, 'LEARNING_RATE_INITIAL': 7, 'LEARNING_RATE_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 10, 'UNCERTAINTY_ERROR_SENSITIVITY': 2, 'SQUASH_FRACTION': -0.1}
+parameters = {'MAX_ELO_CHANGE': 22, 'HOME_FIELD_ELO': 40, 'HOME_FIELD_MULTIPLIER': 8, 'VAR_A': 1, 'VAR_B': 1, 'VAR_C': 1, 'VAR_D': 1, 'VAR_E': 1, 'VAR_F': 1, 'UNCERTAINTY_INITIAL': 10, 'UNCERTAINTY_DECAY': 0.75, 'UNCERTAINTY_INCREASE': 10, 'UNCERTAINTY_ERROR_SENSITIVITY': 3, 'SQUASH_FRACTION': -0.1}
 bases = {}
 improvements = {}
 for k in parameters.keys():

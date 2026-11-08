@@ -7,7 +7,7 @@ import generate_html
 HOME_FIELD_ELO = 50
 HOME_FIELD_MULTIPLIER = 5
 MAX_ELO_CHANGE = 150
-LEARNING_RATE_DECAY = 0.5
+UNCERTAINTY_DECAY = 0.5
 UNCERTAINTY_INCREASE = 1
 UNCERTAINTY_ERROR_SENSITIVITY = 1
 VAR_A = 1
@@ -143,8 +143,8 @@ def calculate_elo_changes(instr, elo_ratings, home_field_elo_boosts, uncertainty
         home_field_elo_boosts[b_name] = max(0, new_val)
 
     global UNCERTAINTY_INCREASE
-    uncertainty_multiplier[a_name] = (old_a_uncertainty_multiplier - 1) * LEARNING_RATE_DECAY + (UNCERTAINTY_INCREASE * abs(a_error)**UNCERTAINTY_ERROR_SENSITIVITY) + 1
-    uncertainty_multiplier[b_name] = (old_b_uncertainty_multiplier - 1) * LEARNING_RATE_DECAY + (UNCERTAINTY_INCREASE * abs(b_error)**UNCERTAINTY_ERROR_SENSITIVITY) + 1
+    uncertainty_multiplier[a_name] = (old_a_uncertainty_multiplier - 1) * UNCERTAINTY_DECAY + (UNCERTAINTY_INCREASE * abs(a_error)**UNCERTAINTY_ERROR_SENSITIVITY) + 1
+    uncertainty_multiplier[b_name] = (old_b_uncertainty_multiplier - 1) * UNCERTAINTY_DECAY + (UNCERTAINTY_INCREASE * abs(b_error)**UNCERTAINTY_ERROR_SENSITIVITY) + 1
 
     history[a_name].append([a_home_field, elo_ratings[a_name][-2], b_name, b_home_field, elo_ratings[b_name][-2], a_expected_winchance, str(a_score) + ' - ' + str(b_score), a_result_winchance, a_elo_change, old_a_uncertainty_multiplier])
     history[b_name].append([b_home_field, elo_ratings[b_name][-2], a_name, a_home_field, elo_ratings[a_name][-2], b_expected_winchance, str(b_score) + ' - ' + str(a_score), b_result_winchance, b_elo_change, old_b_uncertainty_multiplier])
@@ -161,6 +161,9 @@ def calculate_win_50_elo(fake_games_played, opponent_elos):
     # Returns the hypothetical elo required to win exactly 50% of games
     # Calculate a binary search in the elo space to find the win50 elo
     # Stop once you are within 0.001 of the ideal expected_win_percentage
+    if fake_games_played >= len(opponent_elos):
+        return -math.inf
+
     min_elo = min(opponent_elos) - 2000
     max_elo = max(opponent_elos)
     guess_elo = (min_elo + max_elo) / 2
@@ -227,6 +230,9 @@ def calculate_elos():
             for key in history.keys():
                 history[key] = []
                 fake_games_played[key] = 0
+        elif instr.startswith('#clearhistory'):
+            for key in history.keys():
+                history[key] = []
         elif instr.startswith('#squash '):
             squash_amount = float(instr.split('#squash ')[1])
             for team in elo_ratings.keys():
@@ -263,12 +269,12 @@ def calculate_elos():
         elif instr.startswith('#var_f '):
             global VAR_F
             VAR_F = float(instr.split('#var_f ')[1])
-        elif instr.startswith('#setrate '):
+        elif instr.startswith('#setuncertainty '):
             for team in uncertainty_multiplier.keys():
-                uncertainty_multiplier[team] = float(instr.split('#setrate ')[1])
-        elif instr.startswith('#setratedecay '):
-            global LEARNING_RATE_DECAY
-            LEARNING_RATE_DECAY = float(instr.split('#setratedecay ')[1])
+                uncertainty_multiplier[team] = float(instr.split('#setuncertainty ')[1])
+        elif instr.startswith('#uncertaintydecay '):
+            global UNCERTAINTY_DECAY
+            UNCERTAINTY_DECAY = float(instr.split('#uncertaintydecay ')[1])
         elif instr.startswith('#uncertaintyincrease '):
             global UNCERTAINTY_INCREASE
             UNCERTAINTY_INCREASE = float(instr.split('#uncertaintyincrease ')[1])
