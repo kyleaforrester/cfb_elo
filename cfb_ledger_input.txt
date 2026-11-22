@@ -143,23 +143,23 @@
 // Error: 4588.23273661233
 // Average Linear Error: 0.3738943354431468
 // Percent Correct: 0.7117590822179732
-#maxelochange 13.219
-#homefieldelo 44.154
-#homefieldmultiplier 8.0542
-#var_a 3.2123
-#var_b 35.994
-#var_c 188.21
-#var_d 0.042498
-#var_e 0.00000000049505
-#var_f 697.53
-#uncertaintydecay 0.81317
-#uncertaintyincrease 11.088
-#uncertaintyerrorsensitivity 3.3155
+#maxelochange 22.635
+#homefieldelo 46.407
+#homefieldmultiplier 10.138
+#var_a 3.2341
+#var_b 48.479
+#var_c 148.72
+#var_d 0.031137
+#var_e 0.000000000011058
+#var_f 807.81
+#uncertaintydecay 0.80955
+#uncertaintyincrease 4.4581
+#uncertaintyerrorsensitivity 3.4697
 
 // 2017 Season
-#squash -0.10872
+#squash -0.11027
 #newseason
-#setuncertainty 16.198
+#setuncertainty 9.3047
 Stanford,V,62,Rice,H,7
 South Fla.,V,42,San Jose St.,H,22
 Oregon St.,V,27,Colorado St.,H,58
@@ -1044,9 +1044,9 @@ North Dakota St.,V,17,James Madison,V,13
 Alabama,V,26,Georgia,V,23
 
 // 2018 Season
-#squash -0.10872
+#squash -0.11027
 #newseason
-#setuncertainty 16.198
+#setuncertainty 9.3047
 Duquesne,V,15,Massachusetts,H,63
 N.C. A&T,V,20,Jacksonville St.,H,17
 Prairie View,V,28,Rice,H,31
@@ -2003,9 +2003,9 @@ Mississippi St.,V,22,Iowa,V,27
 Clemson,V,44,Alabama,V,16
 
 // 2019 Season
-#squash -0.10872
+#squash -0.11027
 #newseason
-#setuncertainty 16.198
+#setuncertainty 9.3047
 Miami (FL),V,20,Florida,V,24
 Arizona,V,38,Hawaii,H,45
 Florida A&M,V,0,UCF,H,62
@@ -2970,10 +2970,10 @@ Clemson,V,25,LSU,V,42
 // Skip 2020 Because it was just too crazy
 
 // 2021 Season
-#squash -0.10872
+#squash -0.11027
 #newseason
 #clearhistory
-#setuncertainty 16.198
+#setuncertainty 9.3047
 Nebraska,V,22,Illinois,H,30
 UConn,V,0,Fresno St.,H,45
 Hawaii,V,10,UCLA,H,44
@@ -3870,9 +3870,9 @@ LSU,V,20,Kansas St.,V,42
 Georgia,V,33,Alabama,V,18
 
 // 2022 Season
-#squash -0.10872
+#squash -0.11027
 #newseason
-#setuncertainty 16.198
+#setuncertainty 9.3047
 Austin Peay,V,27,Western Ky.,H,38
 Nebraska,V,28,Northwestern,H,31
 Idaho St.,V,21,UNLV,H,52
@@ -4773,9 +4773,9 @@ Mississippi St.,V,19,Illinois,V,10
 TCU,V,7,Georgia,V,65
 
 // 2023 Season
-#squash -0.10872
+#squash -0.11027
 #newseason
-#setuncertainty 16.198
+#setuncertainty 9.3047
 San Jose St.,V,28,Southern California,H,56
 Navy,V,3,Notre Dame,V,42
 UTEP,V,14,Jacksonville St.,H,17
@@ -5688,9 +5688,9 @@ Iowa,V,0,Tennessee,V,35
 Washington,V,13,Michigan,V,34
 
 // 2024 Season
-#squash -0.10872
+#squash -0.11027
 #newseason
-#setuncertainty 16.198
+#setuncertainty 9.3047
 Florida St.,V,21,Georgia Tech,V,24
 Montana St.,V,35,New Mexico,H,31
 SMU,V,29,Nevada,H,24
@@ -6612,9 +6612,9 @@ Ohio St.,V,28,Texas,V,14
 Ohio St.,V,34,Notre Dame,V,23
 
 // 2025 Season
-#squash -0.10872
+#squash -0.11027
 #newseason
-#setuncertainty 16.198
+#setuncertainty 9.3047
 Iowa St.,V,24,Kansas St.,V,21
 Idaho St.,V,31,UNLV,H,38
 Fresno St.,V,7,Kansas,H,31
@@ -7551,9 +7551,9 @@ Oregon,V,22,Indiana,V,56
 Miami (FL),V,21,Indiana,V,27
 
 // 2026 Season
-#squash -0.10872
+#squash -0.11027
 #newseason
-#setuncertainty 16.198
+#setuncertainty 9.3047
 San Jose St.,V,26,Southern California,H,42
 North Carolina,V,15,TCU,V,10
 NC State,V,8,Virginia,H,34
@@ -8239,3 +8239,140 @@ Fresno St.,V,10,Utah St.,H,17
 Hawaii,V,17,UTEP,H,14
 Wyoming,V,41,UNLV,H,35
 Texas St.,V,42,Oregon St.,H,21
+Ole Miss,V,17,Oklahoma,H,24
+Kent St.,V,28,Bowling Green,H,33
+Western Mich.,V,42,Akron,H,14
+Ohio,V,17,Miami (OH),H,34
+Sacramento St.,V,7,Central Mich.,H,28
+Massachusetts,V,0,Toledo,H,24
+Buffalo,V,28,Ball St.,H,7
+Memphis,V,52,South Fla.,H,41
+Louisiana,V,42,ULM,H,21
+Illinois,V,14,UCLA,H,22
+Houston,V,32,Colorado,H,42
+Florida St.,V,16,Pittsburgh,H,10
+Missouri,V,21,Georgia,H,48
+Utah,V,40,Arizona,H,39
+Alabama,V,21,Vanderbilt,H,6
+Boston College,V,7,Notre Dame,H,41
+Texas,V,22,LSU,H,21
+Duke,V,25,Miami (FL),H,36
+Tennessee,V,22,Texas A&M,H,7
+Southern California,V,13,Indiana,H,27
+Baylor,V,7,BYU,H,28
+Florida,V,21,Kentucky,H,14
+Texas Tech,V,52,Oklahoma St.,H,27
+Wake Forest,V,49,SMU,H,7
+Purdue,V,7,Iowa,H,28
+Michigan,V,7,Oregon,H,31
+South Carolina,V,6,Arkansas,H,34
+Northwestern,V,19,Ohio St.,H,28
+Oregon St.,V,41,Boise St.,H,46
+Wisconsin,V,21,Maryland,H,24
+Syracuse,V,34,NC State,H,31
+Cincinnati,V,13,Iowa St.,H,41
+James Madison,V,22,UConn,H,46
+Nebraska,V,31,Rutgers,H,0
+Georgia Tech,V,20,Clemson,H,6
+UAB,V,36,Temple,H,10
+Arkansas St.,V,21,Coastal Carolina,H,28
+East Carolina,V,17,Charlotte,H,16
+Kansas St.,V,10,TCU,H,20
+Kennesaw St.,V,26,Sam Houston,H,7
+New Mexico St.,V,21,Missouri St.,H,27
+FIU,V,16,Delaware,H,24
+California,V,7,Virginia,H,36
+Middle Tenn.,V,23,Liberty,H,28
+Ga. Southern,V,34,Georgia St.,H,17
+Kansas,V,37,West Virginia,H,14
+Nevada,V,28,NIU,H,7
+Jacksonville St.,V,24,Western Ky.,H,34
+Fresno St.,V,35,Texas St.,H,37
+Auburn,V,41,Mississippi St.,H,9
+Tulane,V,20,Rice,H,17
+Southern Miss.,V,31,Louisiana Tech,H,63
+Arizona St.,V,26,UCF,H,13
+Washington,V,21,Michigan St.,H,14
+App State,V,20,Marshall,H,16
+Troy,V,14,South Alabama,H,27
+Minnesota,V,14,Penn St.,H,42
+Louisville,V,16,North Carolina,H,14
+San Jose St.,V,3,Air Force,H,24
+Fla. Atlantic,V,21,Tulsa,H,38
+UNLV,V,21,New Mexico,H,17
+Stanford,V,40,Virginia Tech,H,22
+North Texas,V,16,UTSA,H,35
+Utah St.,V,13,San Diego St.,H,30
+Wyoming,V,27,UTEP,H,15
+Colorado St.,V,7,Washington St.,H,73
+North Dakota St.,V,21,Hawaii,H,13
+Georgia,V,34,South Carolina,H,6
+Utah,V,38,TCU,H,17
+Chattanooga,V,0,Alabama,H,47
+UCLA,V,16,Michigan,H,18
+Arkansas,V,3,Texas,H,45
+SMU,V,3,Notre Dame,H,24
+Virginia Tech,V,20,Miami (FL),H,28
+Indiana,V,24,Washington,H,27
+LSU,V,13,Tennessee,H,27
+BYU,V,31,Kansas,H,29
+Wake Forest,V,50,Georgia Tech,H,29
+Texas Tech,V,20,Baylor,H,10
+Ohio St.,V,28,Nebraska,H,31
+Iowa,V,34,Illinois,H,17
+Kentucky,V,14,Missouri,H,28
+San Diego St.,V,22,Boise St.,H,20
+Maryland,V,21,Southern California,H,35
+Arizona,V,35,Kansas St.,H,28
+Houston,V,34,West Virginia,H,31
+Oklahoma St.,V,30,Arizona St.,H,27
+Pittsburgh,V,10,Louisville,H,42
+Vanderbilt,V,27,Florida,H,34
+Wofford,V,17,Ole Miss,H,59
+Memphis,V,34,Navy,H,38
+North Texas,V,24,Tulane,H,28
+Wisconsin,V,42,Purdue,H,10
+Northwestern,V,17,Minnesota,H,20
+East Carolina,V,10,Army West Point,H,6
+Colorado,V,28,Cincinnati,H,35
+Syracuse,V,15,Boston College,H,27
+North Carolina,V,24,Virginia,H,41
+Tennessee Tech,V,16,Mississippi St.,H,34
+Western Ky.,V,14,Liberty,H,45
+Missouri St.,V,20,Jacksonville St.,H,25
+Charlotte,V,14,Tulsa,H,42
+Middle Tenn.,V,31,Sam Houston,H,28
+South Fla.,V,14,Fla. Atlantic,H,35
+ULM,V,16,App State,H,17
+Delaware,V,42,New Mexico St.,H,30
+Coastal Carolina,V,24,Louisiana,H,38
+FIU,V,24,Kennesaw St.,H,35
+Old Dominion,V,21,UConn,H,29
+NC State,V,28,Florida St.,H,10
+Rutgers,V,25,Penn St.,H,24
+Samford,V,17,Auburn,H,59
+Texas A&M,V,7,Oklahoma,H,28
+NIU,V,25,North Dakota St.,H,31
+Ga. Southern,V,45,Troy,H,7
+South Alabama,V,40,Southern Miss.,H,35
+Georgia St.,V,27,Marshall,H,28
+Washington St.,V,14,Texas St.,H,42
+Arkansas St.,V,3,Louisiana Tech,H,48
+UNLV,V,24,San Jose St.,H,22
+Colorado St.,V,42,Fresno St.,H,49
+Stanford,V,44,California,H,28
+UTSA,V,19,UAB,H,17
+Utah St.,V,24,Oregon St.,H,31
+Hawaii,V,8,Nevada,H,16
+Eastern Mich.,V,27,Western Mich.,H,34
+Miami (OH),V,20,Kent St.,H,3
+Ball St.,V,28,Ohio,H,35
+Akron,V,34,Massachusetts,H,33
+Central Mich.,V,21,Buffalo,H,40
+Rice,V,31,Temple,H,27
+Oregon,V,45,Michigan St.,H,7
+Iowa St.,V,17,UCF,H,48
+Clemson,V,20,Duke,H,10
+Bowling Green,V,0,Toledo,H,19
+UTEP,V,3,Air Force,H,52
+New Mexico,V,24,Wyoming,H,17
